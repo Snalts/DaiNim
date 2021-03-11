@@ -3,5 +3,8 @@
     <string name="action_save">test1</string>
     <string name="action_delete">test2</string>
     <string name="action_settings">test3</string>
-    <string name="textview">TextView</string>
+    <!-- Used in NavigationDrawer -->
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="parametres">Paramètres</string>
 </resources>

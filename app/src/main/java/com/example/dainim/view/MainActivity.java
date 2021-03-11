@@ -1,107 +1,104 @@
 package com.example.dainim.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.widget.TextView;
+import android.view.MenuItem;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.navigation.NavigationView;
 
 import com.example.dainim.R;
-import com.example.dainim.modele.ApiCom;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
-    private ApiCom api;
-    protected Object obj;
-    protected TextView tap;
-    protected AnimView a;
+
+    //FOR DESIGN
+    private Toolbar toolbar;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        obj = new Object();
-        /*api = new ApiCom();
-        Log.d("M","Ab");
-        try{
-            api.get_search_anim();
-        }
-        catch (IOException e){
-            Log.d("ME",e.toString());
-        }*/
-        /*StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        StrictMode.setThreadPolicy(policy);
-        Anime a = new Anime(42897);
-        a.start();
-
-        try {
-            a.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        try {
-            System.out.println(a.getTitle());
-            System.out.println(a.getTitleJapanese());
-            TextView api = (TextView) findViewById(R.id.apitest);
-            api.setText(a.getTitle());
-            System.out.println(a.getSynopsis());
-        }
-        catch(Exception e){
-                Log.d("Erreur","CHiant");
-        }
-
-         */
-        //LongRunningTask lrt = new LongRunningTask(42897);
-
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        tap = ((TextView) findViewById(R.id.apitest));
-        tap.setText("TEST");
+        //getWindow().getDecorView().setBackgroundColor(Color.parseColor("#32353B"));
 
+        // 6 - Configure all views
 
-        try {
-            a= new AnimView(42897,tap,obj);
+        this.configureToolBar();
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        this.configureDrawerLayout();
+
+        this.configureNavigationView();
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        // 5 - Handle back click to close menu
+        if(this.drawerLayout.isDrawerOpen(GravityCompat.START))
+        {
+            this.drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
         }
-
-        getWindow().getDecorView().setBackgroundColor(Color.parseColor("#32353b"));
-
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        toolbar.setNavigationIcon(R.drawable.menu);
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
     }
 
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu)
+    public boolean onNavigationItemSelected(MenuItem item)
     {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.options_menu, menu);
+        // 4 - Handle Navigation Item Click
+        int id = item.getItemId();
+
+        switch (id)
+        {
+            case R.id.activity_main_drawer_news :
+                break;
+            case R.id.activity_main_drawer_profile:
+                break;
+            case R.id.activity_main_drawer_settings:
+                break;
+            default:
+                break;
+        }
+
+        this.drawerLayout.closeDrawer(GravityCompat.START);
 
         return true;
     }
 
-    private void initToolbar()
-    {
+    // ---------------------
+    // CONFIGURATION
+    // ---------------------
 
+    // 1 - Configure Toolbar
+    private void configureToolBar()
+    {
+        this.toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
+        setSupportActionBar(toolbar);
+    }
+
+    // 2 - Configure Drawer Layout
+    private void configureDrawerLayout()
+    {
+        this.drawerLayout = (DrawerLayout) findViewById(R.id.activity_main_drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+    }
+
+    // 3 - Configure NavigationView
+    private void configureNavigationView()
+    {
+        this.navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 }
