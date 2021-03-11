@@ -34,6 +34,7 @@ android {
 }
 
 dependencies {
+    implementation group: 'org.json', name: 'json', version: '20201115'
 
     //noinspection GradleCompatible
     //implementation 'com.android.support:design:26.1.0'
