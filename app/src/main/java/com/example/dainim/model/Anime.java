@@ -48,6 +48,10 @@ public class Anime{
     public String getSynopsis() throws JSONException {
         return data.getString("synopsis");
     }
+
+    public String getImage() throws JSONException{
+        return data.getString("image_url");
+    }
     
     /*
       * Method toString
