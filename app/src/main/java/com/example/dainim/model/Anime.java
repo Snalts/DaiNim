@@ -10,9 +10,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Anime{
-    JSONObject data;
-    int id_anim;
-    Object obj;
+    private JSONObject data;
+    private int id_anim;
+    private Object obj;
     public Anime(int id,Object obj) throws InterruptedException {
         this.id_anim = id;
         this.obj = obj;
@@ -30,7 +30,7 @@ public class Anime{
      * @throws getting back JSONException if data not declare
      */
     public String getTitle() throws JSONException {
-        return data.getString("title");
+        return this.data.getString("title");
     }
 
     /*
@@ -38,7 +38,7 @@ public class Anime{
      * @throws getting back JSONException if data not declare
      */
     public String getTitleJapanese() throws JSONException {
-        return data.getString("title_japanese");
+        return this.data.getString("title_japanese");
     }
 
     /*
@@ -46,11 +46,11 @@ public class Anime{
     * @throws getting back JSONException if data not declare
     */
     public String getSynopsis() throws JSONException {
-        return data.getString("synopsis");
+        return this.data.getString("synopsis");
     }
 
     public String getImage() throws JSONException{
-        return data.getString("image_url");
+        return this.data.getString("image_url");
     }
     
     /*

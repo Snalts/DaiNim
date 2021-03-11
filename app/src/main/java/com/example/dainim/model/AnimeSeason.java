@@ -2,20 +2,20 @@ package com.example.dainim.model;
 
 import android.util.Log;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Scanner;
-
+import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class AnimeSeason extends Thread {
-    JSONObject data;
-    int year;
-    Season season;
-    Object obj;
+    private ArrayList<Anime> list_anim;
+    private JSONObject data;
+    private int year;
+    private Season season;
+    private Object obj;
+
     public AnimeSeason(int year, Season season, Object obj) throws InterruptedException, JSONException {
+        list_anim = new ArrayList<Anime>();
         this.year = year;
         this.season = season;
         this.obj = obj;
@@ -24,25 +24,25 @@ public class AnimeSeason extends Thread {
         link.start();
         link.join();
         data = link.getData();
-        /*for(JSONArray arr, (data.getJSONArray("anime"))){
-
-        }*/
-
+        JSONArray arr_data = data.getJSONArray("anime");
+        for(int i=0;i < arr_data.length()-1;i++){
+            list_anim.add(new Anime(arr_data.getJSONObject(i)));
+        }
     }
     /*
-     * getTitle return the Japaness title in romanji.
+     * ArrayList<Anime> return the list of anime.
      * @throws getting back JSONException if data not declare
      */
-    public String getTitle() throws JSONException {
-        return data.getString("title");
+    public ArrayList<Anime> getListAnime(){
+        return list_anim;
     }
 
     /*
-     * getTitleJapanese return the Japanese style.
+     * getAnime return the Japanese style.
      * @throws getting back JSONException if data not declare
      */
-    public String getTitleJapanese() throws JSONException {
-        return data.getString("title_japanese");
+    public Anime getAnim(int index) throws JSONException {
+        return list_anim.get(index);
     }
 
     /*
@@ -58,12 +58,6 @@ public class AnimeSeason extends Thread {
      * Return Anim class to String
      */
     public String toString(){
-        String back = "Bonjour";
-        try {
-            back = "Test" + this.getTitle() + ':' + this.getTitleJapanese();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return back;
+       return "Anim list " + list_anim.toString();
     }
 }
