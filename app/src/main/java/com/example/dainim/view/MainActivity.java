@@ -3,6 +3,7 @@ package com.example.dainim.view;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,6 +22,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
+    protected Object obj;
+    protected TextView tap;
+    protected AnimView a;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -28,6 +32,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        try {
+            obj = new Object();
+            a = new AnimView(1,tap,obj);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //getWindow().getDecorView().setBackgroundColor(Color.parseColor("#32353B"));
 
         // 6 - Configure all views
