@@ -1,47 +1,69 @@
 package com.example.dainim.model;
 
-import android.util.Log;
 
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Scanner;
-
+import java.io.Serializable;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Anime{
-    private JSONObject data;
+public class Anime implements Serializable {
+    private static final long serialVersionUID = 1350092881346723535L;
     private int id_anim;
-    private Object obj;
+    private String title;
+    private String url_image;
+    private String synopsis;
+    private String time;
+
+
     public Anime(int id,Object obj) throws InterruptedException {
         this.id_anim = id;
-        this.obj = obj;
         String s_url = "https://api.jikan.moe/v3/anime/" + id_anim;
         UrlConnect link = new UrlConnect(s_url,obj);
         link.start();
         link.join();
-        data = link.getData();
+        JSONObject data = link.getData();
+        try {
+            setValue(data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
     public Anime(JSONObject data){
-        this.data = data;
+        try {
+            setValue(data);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
     /*
-     * getTitle return the Japaness title in romanji.
-     * @throws getting back JSONException if data not declare
+    * setValue, get data to json API Jikan.
+    * @param JSONObject data -> data for anime
+    *@throws getting back JSONException if data not declare
      */
-    public String getTitle() throws JSONException {
-        return this.data.getString("title");
+    private void setValue(JSONObject data) throws JSONException {
+        this.title = data.getString("title");
+        this.synopsis = data.getString("synopsis");
+        this.url_image = data.getString("image_url");
+        this.time = data.getString("airing_start");
+    }
+    /*
+     * getTitle return the title.
+     */
+    public String getTitle() {
+        return this.title;
     }
     /*
     * getSynopsis return the synopsis for Anime
-    * @throws getting back JSONException if data not declare
     */
-    public String getSynopsis() throws JSONException {
-        return this.data.getString("synopsis");
+    public String getSynopsis(){
+        return this.synopsis;
     }
 
-    public String getImage() throws JSONException{
-        return this.data.getString("image_url");
+    public String getImage(){
+        return this.url_image;
+    }
+
+    public String getTime(){
+        return this.time;
     }
     
     /*
@@ -49,12 +71,6 @@ public class Anime{
       * Return Anim class to String
      */
     public String toString(){
-        String back = "Bonjour";
-        try {
-             back = "Test" + this.getTitle();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return back;
+        return "Titre : " + this.title + "| Url_Image" + this.url_image;
     }
 }
