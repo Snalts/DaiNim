@@ -21,6 +21,7 @@ public class UrlConnect extends Thread {
     public void run() {
         try {
             synchronized (obj) {
+                obj.wait(4000);
                 URL url = new URL(this.s_url);
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
