@@ -29,7 +29,37 @@
             android:id="@+id/activity_main_frame_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/colorPrimary"/>
+            android:background="?attr/colorPrimary">
+
+            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:collapseColumns="2"> <!-- collapse the first column of the table row-->
+
+
+                <!-- first row of the table layout-->
+                <TableRow
+                    android:id="@+id/row1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent">
+
+                    <!-- Add elements/columns in the first row-->
+
+                    <ImageView
+                        android:id="@+id/imageview"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"/>
+
+                    <ImageView
+                        android:id="@+id/imageview2"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"/>
+
+                </TableRow>
+
+            </TableLayout>
+
+        </FrameLayout>
 
     </LinearLayout>
 
@@ -42,6 +72,7 @@
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/activity_main_nav_header"
         app:menu="@menu/activity_main_menu_drawer"
-        android:background="?attr/colorPrimary"/>
+        android:background="?attr/colorPrimary"
+        app:itemTextColor="@color/white"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>

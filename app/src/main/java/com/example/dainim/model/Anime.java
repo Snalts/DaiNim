@@ -37,7 +37,7 @@ public class Anime{
      * getTitleJapanese return the Japanese style.
      * @throws getting back JSONException if data not declare
      */
-    public String getTitleJapanese() throws JSONException {
+    public String getJapaneseTitle() throws JSONException {
         return this.data.getString("title_japanese");
     }
 
@@ -60,7 +60,7 @@ public class Anime{
     public String toString(){
         String back = "Bonjour";
         try {
-             back = "Test" + this.getTitle() + ':' + this.getTitleJapanese();
+             back = "Test" + this.getTitle() + ':' + this.getJapaneseTitle();
         } catch (JSONException e) {
             e.printStackTrace();
         }

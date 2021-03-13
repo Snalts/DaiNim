@@ -45,4 +45,6 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     //androidTestImplementation
+
+    implementation 'com.squareup.picasso:picasso:2.8'
 }

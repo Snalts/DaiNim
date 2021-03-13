@@ -18,7 +18,8 @@
                 <item
                     android:id="@+id/activity_main_drawer_profile"
                     android:icon="@drawable/baseline_android_black_18dp"
-                    android:title="Profil"/>
+                    android:title="Profil"
+                    android:theme="@style/Theme.DaiNim"/>
                 <item
                     android:id="@+id/activity_main_drawer_settings"
                     android:icon="@drawable/baseline_build_black_18dp"

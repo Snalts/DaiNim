@@ -8,13 +8,14 @@ import com.example.dainim.model.Anime;
 
 import org.json.JSONException;
 
-public class AnimView {
+public class AnimeView {
     private Anime a;
     private TextView text;
-    public AnimView(int id,TextView text,Object obj) throws InterruptedException{
+    public AnimeView(int id, TextView text, Object obj) throws InterruptedException
+    {
         this.text = text;
-        Anime a = new Anime(id,obj);
-    /*    AnimeSeason at = new AnimeSeason(2018,Season.WINTER,obj);
+        this.a = new Anime(id, obj);
+        /*AnimeSeason at = new AnimeSeason(2018,Season.WINTER,obj);
         /*a.start();
         a.join();
         at.start();
@@ -23,4 +24,8 @@ public class AnimView {
         //this.text.setText(a.getTitle());
     }
 
+    public Anime getAnime()
+    {
+        return this.a;
+    }
 }
