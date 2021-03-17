@@ -23,12 +23,14 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     private Toolbar toolbar;
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
-    private Intent intent;
+    private Intent intent_menu;
+    private Intent intent_planning;
 
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        intent = new Intent(getApplicationContext(), PlanningActivity.class);
+        intent_menu = new Intent(getApplicationContext(), MainActivity.class);
+        intent_planning = new Intent(getApplicationContext(), PlanningActivity.class);
     }
 
     @Override
@@ -65,8 +67,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 break;
             case R.id.activity_main_drawer_login:
                 break;
+            case R.id.activity_main_drawer_menu:
+                startActivity(intent_menu);
+                break;
             case R.id.activity_main_drawer_planning:
-                startActivity(intent);
+                startActivity(intent_planning);
                 break;
             case R.id.activity_main_drawer_settings:
                 break;
