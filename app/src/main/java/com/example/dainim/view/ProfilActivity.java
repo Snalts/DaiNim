@@ -41,6 +41,7 @@ public class ProfilActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_profil);
         this.configureAll();
         this.updateUIWhenCreating();
         this.update = (Button)findViewById(R.id.profile_activity_button_update);
@@ -49,8 +50,6 @@ public class ProfilActivity extends BaseActivity {
         this.signout.setOnClickListener(new signoutListener(this));
         this.delete.setOnClickListener(new deleteListener(this));
     }
-
-    public int getFragmentLayout() { return R.layout.activity_profil; }
 
     // --------------------
     // ACTIONS
