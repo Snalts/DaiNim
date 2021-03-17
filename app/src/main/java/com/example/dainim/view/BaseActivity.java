@@ -39,8 +39,8 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        intent = new Intent(getApplicationContext(), PlanningActivity.class);
-        intent_profil = new Intent(getApplicationContext(), PlanningActivity.class);
+        this.intent = new Intent(getApplicationContext(), PlanningActivity.class);
+        this.intent_profil = new Intent(getApplicationContext(), PlanningActivity.class);
     }
 
     @Override
@@ -64,18 +64,15 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         switch (id)
         {
             case R.id.activity_main_drawer_signup:
-                startActivityForResult(
-                        AuthUI.getInstance()
-                                .createSignInIntentBuilder()
-                                .setTheme(R.style.LoginTheme)
-                                .setAvailableProviders(
-                                        Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build()))
-                                .setIsSmartLockEnabled(false, true)
-                                .setLogo(R.drawable.ic_logo_auth)
-                                .build(),
-                        RC_SIGN_IN);
+
                 break;
             case R.id.activity_main_drawer_login:
+                if(isCurrentUserLogged()) {
+                    startActivity(intent_profil);
+                }
+                else{
+                    startSignInActivity();
+                }
                 break;
             case R.id.activity_main_drawer_planning:
                 startActivity(intent);
@@ -126,7 +123,20 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     // UTILS
     // --------------------
 
-    protected FirebaseUser getCurrentUser(){ return FirebaseAuth.getInstance().getCurrentUser(); }
+    protected  void startSignInActivity(){
+        startActivityForResult(
+                AuthUI.getInstance()
+                        .createSignInIntentBuilder()
+                        .setTheme(R.style.LoginTheme)
+                        .setAvailableProviders(
+                                Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build()))
+                        .setIsSmartLockEnabled(false, true)
+                        .setLogo(R.drawable.ic_logo_auth)
+                        .build(),
+                RC_SIGN_IN);
+    }
 
-    protected Boolean isCurrentUserLogged(){ return (this.getCurrentUser() != null); }
+    protected FirebaseUser getCurrentUser(){ return FirebaseAuth.getInstance().getCurrentUser();}
+
+    protected Boolean isCurrentUserLogged(){ return (getCurrentUser() != null); }
 }
