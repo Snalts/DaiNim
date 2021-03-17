@@ -10,21 +10,71 @@ import java.util.HashMap;
 public class AnimeWeek {
 
     private HashMap<EnumWeek,AnimeDay> h_week_anime;
+    private EnumWeek current;
+    private EnumWeek lastAdd;
+    private static AnimeWeek animeWeek;
+    public Object obj;
 
-    public AnimeWeek(Object obj) throws InterruptedException, JSONException {
+    private AnimeWeek(Object obj) throws InterruptedException, JSONException {
+        this.obj = obj;
         h_week_anime = new HashMap<EnumWeek,AnimeDay>();
-        for(EnumWeek e : EnumWeek.values()){
-            h_week_anime.put(e,new AnimeDay(e,obj));
-            System.out.println(h_week_anime.get(e).getAnime(0).getTitle());
-        }
+        current = EnumWeek.getCurrent();
+        h_week_anime.put(current,new AnimeDay(current,obj));
+        lastAdd = current;
     }
 
+    public AnimeWeek getInstance(Object obj){
+        if (animeWeek == null) {
+            try {
+                animeWeek = new AnimeWeek(obj);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        return animeWeek;
+    }
     /*
      * ArrayList<Anime> return the list of anime.
      * @throws getting back JSONException if data not declare
      */
     public HashMap<EnumWeek,AnimeDay> getAnimeList(){
-        return h_week_anime;
+        return animeWeek.h_week_anime;
+    }
+
+    public ArrayList<Anime> getCurrentWeek(){
+        return animeWeek.h_week_anime.get(animeWeek.current).getAnimeList();
+    }
+
+    public ArrayList<Anime> getWeek(EnumWeek e){
+        return animeWeek.h_week_anime.get(e).getAnimeList();
+    }
+
+    public ArrayList<Anime> nextWeek(){
+        animeWeek.lastAdd = EnumWeek.nextDay(animeWeek.current);
+        if(!animeWeek.h_week_anime.containsKey(animeWeek.lastAdd)){
+            animeWeek.setNewWeek(animeWeek.lastAdd);
+        }
+        return animeWeek.getWeek(animeWeek.lastAdd);
+    }
+
+    public ArrayList<Anime> lastWeek(){
+        animeWeek.lastAdd = EnumWeek.lastDay(animeWeek.current);
+        if(!animeWeek.h_week_anime.containsKey(animeWeek.lastAdd)){
+            animeWeek.setNewWeek(animeWeek.lastAdd);
+        }
+        return animeWeek.getWeek(animeWeek.lastAdd);
+    }
+
+    private void setNewWeek(EnumWeek newDay) {
+        try {
+            animeWeek.h_week_anime.put(newDay,new AnimeDay(newDay,this.obj));
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /*
@@ -32,13 +82,13 @@ public class AnimeWeek {
      * @throws getting back JSONException if data not declare
      */
     public AnimeDay getAnime(EnumWeek e) throws JSONException {
-        return h_week_anime.get(e);
+        return animeWeek.h_week_anime.get(e);
     }
     /*
      * Method toString
      * Return Anim class to String
      */
     public String toString() {
-        return "Anime list " + h_week_anime.toString();
+        return "Anime list " + animeWeek.h_week_anime.toString();
     }
 }

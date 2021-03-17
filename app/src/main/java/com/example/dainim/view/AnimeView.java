@@ -18,6 +18,7 @@ public class AnimeView {
         AnimeSeason a = AnimeSeason.getInstance(obj);
         System.out.println(a.getAnime(a.getYear(),a.getEnumSeason(),0));
         a.newSeason(2021,EnumSeason.SPRING);
+
         /*AnimeSeason at = new AnimeSeason(2018,Season.WINTER,obj);
         /*a.start();
         a.join();

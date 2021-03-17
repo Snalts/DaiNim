@@ -14,7 +14,14 @@ import com.example.dainim.R;
 import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.navigation.NavigationView;
 
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.Arrays;
+
+import reactor.util.annotation.Nullable;
 
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -24,11 +31,16 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     private NavigationView navigationView;
     private DrawerLayout drawerLayout;
     private Intent intent;
+    private Intent intent_profil;
+
+
+
 
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         intent = new Intent(getApplicationContext(), PlanningActivity.class);
+        intent_profil = new Intent(getApplicationContext(), PlanningActivity.class);
     }
 
     @Override
@@ -109,4 +121,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
     }
+
+    // --------------------
+    // UTILS
+    // --------------------
+
+    protected FirebaseUser getCurrentUser(){ return FirebaseAuth.getInstance().getCurrentUser(); }
+
+    protected Boolean isCurrentUserLogged(){ return (this.getCurrentUser() != null); }
 }
