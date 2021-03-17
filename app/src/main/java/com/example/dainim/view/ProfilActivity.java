@@ -1,0 +1,136 @@
+package com.example.dainim.view;
+
+import android.content.DialogInterface;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.example.dainim.R;
+import com.example.dainim.controller.deleteListener;
+import com.example.dainim.controller.signoutListener;
+import com.example.dainim.controller.updateListener;
+import com.example.dainim.model.User;
+
+import androidx.appcompat.app.AlertDialog;
+
+import com.example.dainim.controller.UserHelper;
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import static android.view.View.*;
+
+public class ProfilActivity extends BaseActivity {
+    protected TextInputEditText textInputEditTextUsername;
+    protected TextView textViewEmail;
+    protected ProgressBar progressBar;
+    protected Button update;
+    protected Button signout;
+    protected Button delete;
+
+    //FOR DATA
+    private static final int SIGN_OUT_TASK = 10;
+    private static final int DELETE_USER_TASK = 20;
+    private static final int UPDATE_USERNAME = 30;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.configureAll();
+        this.updateUIWhenCreating();
+        this.update = (Button)findViewById(R.id.profile_activity_button_update);
+        this.update.setOnClickListener(new updateListener(this));
+        this.signout = (Button)findViewById(R.id.profile_activity_button_sign_out);
+        this.signout.setOnClickListener(new signoutListener(this));
+        this.delete.setOnClickListener(new deleteListener(this));
+    }
+
+    public int getFragmentLayout() { return R.layout.activity_profil; }
+
+    // --------------------
+    // ACTIONS
+    // --------------------
+
+    public void signOutUserFromFirebase(){
+        AuthUI.getInstance()
+                .signOut(this)
+                .addOnSuccessListener(this, this.updateUIAfterRESTRequestsCompleted(SIGN_OUT_TASK));
+    }
+
+    public void deleteUserFromFirebase(){
+        if (this.getCurrentUser() != null) {
+
+            //4 - We also delete user from firestore storage
+            UserHelper.deleteUser(this.getCurrentUser().getUid());
+
+            AuthUI.getInstance()
+                    .delete(this)
+                    .addOnSuccessListener(this, this.updateUIAfterRESTRequestsCompleted(DELETE_USER_TASK));
+        }
+    }
+
+    // 3 - Update User Username
+    public void updateUsernameInFirebase(){
+
+        this.progressBar.setVisibility(VISIBLE);
+        String username = this.textInputEditTextUsername.getText().toString();
+
+        if (this.getCurrentUser() != null){
+            if (!username.isEmpty() &&  !username.equals(getString(R.string.info_no_username_found))){
+                UserHelper.updateUsername(username, this.getCurrentUser().getUid()).addOnSuccessListener(this.updateUIAfterRESTRequestsCompleted(UPDATE_USERNAME));
+            }
+        }
+    }
+
+    // --------------------
+    // UI
+    // --------------------
+
+    public void updateUIWhenCreating(){
+
+        if (this.getCurrentUser() != null){
+
+
+            //Get email & username from Firebase
+            String email = TextUtils.isEmpty(this.getCurrentUser().getEmail()) ? getString(R.string.info_no_email_found) : this.getCurrentUser().getEmail();
+
+            //Update views with data
+            this.textViewEmail.setText(email);
+
+            // 5 - Get additional data from Firestore
+            UserHelper.getUser(this.getCurrentUser().getUid()).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    User currentUser = documentSnapshot.toObject(User.class);
+                    String username = TextUtils.isEmpty(currentUser.getUsername()) ? getString(R.string.info_no_username_found) : currentUser.getUsername();
+                    textInputEditTextUsername.setText(username);
+                }
+            });
+        }
+    }
+
+    private OnSuccessListener<Void> updateUIAfterRESTRequestsCompleted(final int origin){
+        return new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                switch (origin){
+                    case UPDATE_USERNAME:
+                        progressBar.setVisibility(INVISIBLE);
+                        break;
+                    case SIGN_OUT_TASK:
+                        finish();
+                        break;
+                    case DELETE_USER_TASK:
+                        finish();
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
+    }
+}

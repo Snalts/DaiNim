@@ -46,7 +46,7 @@ public final class AnimeSeason extends Thread {
     }
     private ArrayList<Anime> setValue() throws JSONException {
         ArrayList<Anime> anime_list = new ArrayList<Anime>();
-        String s_url = "https://api.jikan.moe/v3/season/"+this.year + "/"+ enumSeason.getMinimum();
+        String s_url = "https://api.jikan.moe/v3/season/"+ this.year + "/"+ this.enumSeason.getMinimum();
         UrlConnect link = new UrlConnect(s_url,obj);
         try {
             link.start();
@@ -66,8 +66,8 @@ public final class AnimeSeason extends Thread {
     }
     private void setDictionnary(ArrayList<Anime> arrayList){
         HashMap<EnumSeason,ArrayList<Anime>> dic_season;
-        if(dictionnary.containsKey(year)){
-            dic_season = dictionnary.get(year);
+        if(this.dictionnary.containsKey(year)){
+            dic_season = this.dictionnary.get(year);
         }
         else{
             dic_season = new HashMap<EnumSeason,ArrayList<Anime>>();
@@ -83,15 +83,15 @@ public final class AnimeSeason extends Thread {
      * @throws getting back JSONException if data not declare
      */
     public ArrayList<Anime> getAnimeList(int year,EnumSeason e){
-        return dictionnary.get(year).get(e);
+        return this.dictionnary.get(year).get(e);
     }
 
     public int getYear() {
-        return year;
+        return this.year;
     }
 
     public EnumSeason getEnumSeason() {
-        return enumSeason;
+        return this.enumSeason;
     }
 
     /*
@@ -99,15 +99,7 @@ public final class AnimeSeason extends Thread {
      * @throws getting back JSONException if data not declare
      */
     public Anime getAnime(int year,EnumSeason e,int index) throws JSONException {
-        return dictionnary.get(year).get(e).get(index);
-    }
-
-    /*
-     * getSynopsis return the synopsis for Anime
-     * @throws getting back JSONException if data not declare
-     */
-    public String getSynopsis() throws JSONException {
-        return data.getString("synopsis");
+        return this.dictionnary.get(year).get(e).get(index);
     }
 
     /*
@@ -115,6 +107,6 @@ public final class AnimeSeason extends Thread {
      * Return Anim class to String
      */
     public String toString() {
-       return "Anime Season get " + dictionnary.toString();
+       return "Anime Season get " + this.dictionnary.toString();
     }
 }
