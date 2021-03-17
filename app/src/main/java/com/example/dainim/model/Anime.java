@@ -44,6 +44,8 @@ public class Anime implements Serializable {
         this.synopsis = data.getString("synopsis");
         this.url_image = data.getString("image_url");
         this.time = data.getString("airing_start");
+        this.time = this.time.split("T")[1];
+
     }
     /*
      * getTitle return the title.
