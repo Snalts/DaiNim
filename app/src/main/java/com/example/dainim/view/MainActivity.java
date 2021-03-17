@@ -1,8 +1,11 @@
 package com.example.dainim.view;
 
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,16 +17,17 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.dainim.model.Anime;
 import com.example.dainim.model.AnimeSeason;
-import com.example.dainim.model.Season;
+import com.example.dainim.model.EnumSeason;
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.material.navigation.NavigationView;
 
 import com.example.dainim.R;
+import com.google.android.material.textfield.TextInputEditText;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
-import java.io.InputStream;
-import java.net.URL;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -35,34 +39,67 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AnimeView av;
     private Object obj;
     private TextView tv;
+    private Anime a2;
+    private Intent intent;
+    private static final int RC_SIGN_IN = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        intent = new Intent(getApplicationContext(),animeFrame.class);
 
         // 6 - Configure all views
 
         try
         {
             obj = new Object();
-            av = new AnimeView(1, tv, obj);
+            Button b = (Button) findViewById(R.id.compte);
 
-            Anime a = av.getAnime();
+            /*Connection button*/
+            b.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    this.startSignInActivity();
+                }
+                // 2 - Launch Sign-In Activity
+                public void startSignInActivity(){
+                    startActivityForResult(
+                            AuthUI.getInstance()
+                                    .createSignInIntentBuilder()
+                                    .setTheme(R.style.LoginTheme)
+                                    .setAvailableProviders(
+                                            Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build()))
+                                    .setIsSmartLockEnabled(false, true)
+                                    .setLogo(R.drawable.ic_logo_auth)
+                                    .build(),
+                            RC_SIGN_IN);
+                }
+            });
+
+
+            //AnimeSeason a = AnimeSeason.getInstance(obj);
+            // av = new AnimeView(1, tv, obj);
+
+            /*Anime a = av.getAnime();
             String url = a.getImage();
-            ImageView iv = (ImageView) findViewById(R.id.imageview);
+            ImageButton iv = (ImageButton) findViewById(R.id.view);
             Picasso.get().load(url).into(iv);
 
-            Anime a2 = new Anime(40028, obj);
+            this.a2 = new Anime(40028, obj);
             String url2 = a2.getImage();
-            ImageView iv2 = (ImageView) findViewById(R.id.imageview2);
-            Picasso.get().load(url2).into(iv2);
+            ImageButton iv2 = (ImageButton) findViewById(R.id.view2);
 
+            Picasso.get().load(url2).into(iv2);
+            */
             /*InputStream is = (InputStream) new URL(url).getContent();
             Drawable d = Drawable.createFromStream(is, "src name");*/
             //iv.setImageDrawable(d);
             //iv.setImageResource(R.drawable.ic_openclassrooms);
+           // System.out.println("Affichage dans le Main :" + a.getAnime(2021,EnumSeason.SPRING,0));
+           // System.out.println("Affichage dans le Main :" + a.getAnime(2021,EnumSeason.WINTER,0));
+
         }
         catch (Exception e)
         {
@@ -75,6 +112,63 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         this.configureNavigationView();
     }
+
+
+    public void clickNew(View v){
+        intent.putExtra("anime",a2);
+        /*intent.putExtra("title",a2.getTitle());
+        intent.putExtra("url_image",a2.getImage());
+        intent.putExtra("syno",a2.getSynopsis());
+        */startActivity(intent);
+    }
+    /*
+        //FOR DESIGN
+        // 1 - Get Coordinator Layout
+        @BindView(R.id.main_activity_coordinator_layout) CoordinatorLayout coordinatorLayout;
+
+
+        @Override
+        protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+            super.onActivityResult(requestCode, resultCode, data);
+            // 4 - Handle SignIn Activity response on activity result
+            this.handleResponseAfterSignIn(requestCode, resultCode, data);
+        }
+
+
+        // --------------------
+        // UI
+        // --------------------
+
+        // 2 - Show Snack Bar with a message
+        private void showSnackBar(CoordinatorLayout coordinatorLayout, String message){
+            Snackbar.make(coordinatorLayout, message, Snackbar.LENGTH_SHORT).show();
+        }
+
+        // --------------------
+        // UTILS
+        // --------------------
+
+        // 3 - Method that handles response after SignIn Activity close
+        private void handleResponseAfterSignIn(int requestCode, int resultCode, Intent data){
+
+            IdpResponse response = IdpResponse.fromResultIntent(data);
+
+            if (requestCode == RC_SIGN_IN) {
+                if (resultCode == RESULT_OK) { // SUCCESS
+                    showSnackBar(this.coordinatorLayout, getString(R.string.connection_succeed));
+                } else { // ERRORS
+                    if (response == null) {
+                        showSnackBar(this.coordinatorLayout, getString(R.string.error_authentication_canceled));
+                    } else if (response.getErrorCode() == ErrorCodes.NO_NETWORK) {
+                        showSnackBar(this.coordinatorLayout, getString(R.string.error_no_internet));
+                    } else if (response.getErrorCode() == ErrorCodes.UNKNOWN_ERROR) {
+                        showSnackBar(this.coordinatorLayout, getString(R.string.error_unknown_error));
+                    }
+                }
+            }
+        }
+    */
+    /*--------------------------------------------------------------------------*/
 
     @Override
     public void onBackPressed()
@@ -140,19 +234,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void configureFrameLayout()
     {
-        try
-        {
-            AnimeSeason anime_season = new AnimeSeason(2021, Season.WINTER, new Object());
-
+        AnimeSeason anime_season = AnimeSeason.getInstance(new Object());
             //anime_season.get
-        }
-        catch (InterruptedException e)
-        {
-            e.printStackTrace();
-        }
-        catch (JSONException e)
-        {
-            e.printStackTrace();
-        }
     }
 }

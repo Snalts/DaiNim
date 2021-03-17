@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "324194284092",
+    "project_id": "dainim",
+    "storage_bucket": "dainim.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324194284092:android:46bce4dfd30622d011c939",
+        "android_client_info": {
+          "package_name": "com.example.dainim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324194284092-f00i7aob0kk2ikh26e4kmmg9p0bh827h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.dainim",
+            "certificate_hash": "804a9a9be629bbc1fe7c844a5109edaccd775298"
+          }
+        },
+        {
+          "client_id": "324194284092-q6palh67qmpof5kaa4qidnrpejoj5t6n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCWqQIbRiEuGbum0EfSw8vrRgjV6RKE_xI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324194284092-q6palh67qmpof5kaa4qidnrpejoj5t6n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

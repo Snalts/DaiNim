@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:background="?attr/colorPrimary">
 
-            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:collapseColumns="2"> <!-- collapse the first column of the table row-->
@@ -43,18 +43,33 @@
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent">
 
-                    <!-- Add elements/columns in the first row-->
+                    <Button
+                        android:id="@+id/compte"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Button"
+                        android:layout_alignParentTop="true"
+                        android:background="@null" />
 
-                    <ImageView
-                        android:id="@+id/imageview"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"/>
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/view"
+                        android:clickable="true"
+                        android:onClick="clickNew"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:background="@null" />
 
-                    <ImageView
-                        android:id="@+id/imageview2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"/>
-
+                    <ImageButton
+                        android:layout_width="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:id="@+id/view2"
+                        android:clickable="true"
+                        android:onClick="clickNew"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:background="@null" />
                 </TableRow>
 
             </TableLayout>
