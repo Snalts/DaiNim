@@ -31,33 +31,44 @@
             android:layout_height="match_parent"
             android:background="?attr/colorPrimary">
 
-            <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:collapseColumns="2"> <!-- collapse the first column of the table row-->
+            <ScrollView
+                android:id="@+id/scrollView1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true" >
 
-
-                <!-- first row of the table layout-->
-                <TableRow
-                    android:id="@+id/row1"
+                <HorizontalScrollView
+                    android:id="@+id/hscrll1"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
+                    android:layout_height="wrap_content" >
 
-                    <!-- Add elements/columns in the first row-->
-
-                    <ImageView
-                        android:id="@+id/imageview"
+                    <RelativeLayout
+                        android:id="@+id/RelativeLayout1"
                         android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"/>
+                        android:layout_gravity="center"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical" >
 
-                    <ImageView
-                        android:id="@+id/imageview2"
-                        android:layout_width="fill_parent"
-                        android:layout_height="fill_parent"/>
+                        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:id="@+id/tablelayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true">
 
-                </TableRow>
+                            <!-- first row of the table layout
+                            <TableRow
+                                android:id="@+id/row1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent">
+                            </TableRow>-->
 
-            </TableLayout>
+                        </TableLayout>
+
+                    </RelativeLayout>
+
+                </HorizontalScrollView>
+
+            </ScrollView>
 
         </FrameLayout>
 

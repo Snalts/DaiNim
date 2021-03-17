@@ -1,9 +1,11 @@
 package com.example.dainim.view;
 
-import android.graphics.drawable.Drawable;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.ImageView;
+import android.widget.ImageButton;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -12,18 +14,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.dainim.controller.AnimeClickListener;
 import com.example.dainim.model.Anime;
 import com.example.dainim.model.AnimeSeason;
-import com.example.dainim.model.Season;
+import com.example.dainim.model.EnumSeason;
 import com.google.android.material.navigation.NavigationView;
 
 import com.example.dainim.R;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
-
-import java.io.InputStream;
-import java.net.URL;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
@@ -35,45 +35,22 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AnimeView av;
     private Object obj;
     private TextView tv;
+    private Anime anime;
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        intent = new Intent(getApplicationContext(), AnimeActivity.class);
 
         // 6 - Configure all views
 
-        try
-        {
-            obj = new Object();
-            av = new AnimeView(1, tv, obj);
-
-            Anime a = av.getAnime();
-            String url = a.getImage();
-            ImageView iv = (ImageView) findViewById(R.id.imageview);
-            Picasso.get().load(url).into(iv);
-
-            Anime a2 = new Anime(40028, obj);
-            String url2 = a2.getImage();
-            ImageView iv2 = (ImageView) findViewById(R.id.imageview2);
-            Picasso.get().load(url2).into(iv2);
-
-            /*InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");*/
-            //iv.setImageDrawable(d);
-            //iv.setImageResource(R.drawable.ic_openclassrooms);
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-
         this.configureToolBar();
-
         this.configureDrawerLayout();
-
         this.configureNavigationView();
+        this.configureFrameLayout();
     }
 
     @Override
@@ -96,9 +73,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id)
         {
-            case R.id.activity_main_drawer_news :
+            case R.id.activity_main_drawer_signup:
                 break;
-            case R.id.activity_main_drawer_profile:
+            case R.id.activity_main_drawer_login:
+                break;
+            case R.id.activity_main_drawer_planning:
                 break;
             case R.id.activity_main_drawer_settings:
                 break;
@@ -142,9 +121,23 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         try
         {
-            AnimeSeason anime_season = new AnimeSeason(2021, Season.WINTER, new Object());
+            AnimeSeason anime_season = new AnimeSeason(2021, EnumSeason.WINTER, new Object());
+            TableLayout table_layout = (TableLayout) findViewById(R.id.tablelayout);
 
-            //anime_season.get
+            for(int i = 0; i < anime_season.getAnimeList().size(); i += 3)
+            {
+                TableRow table_row_image = new TableRow(this);
+
+                for(int j = 0; j < 3; j++)
+                {
+                    if(i + j < anime_season.getAnimeList().size())
+                    {
+                        displayAnime(anime_season, table_row_image, i + j);
+                    }
+                }
+
+                table_layout.addView(table_row_image);
+            }
         }
         catch (InterruptedException e)
         {
@@ -154,5 +147,19 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         {
             e.printStackTrace();
         }
+    }
+
+    private void displayAnime(AnimeSeason anime_season, TableRow table_row_image, int i) throws JSONException
+    {
+        Anime anime = anime_season.getAnime(i);
+        String url = anime.getImage();
+        ImageButton image_button = new ImageButton(this);
+
+        //image_button.setMinimumHeight(500);
+        //image_button.setMinimumWidth(370);
+        image_button.setClickable(true);
+        image_button.setOnClickListener(new AnimeClickListener(this, this.intent, anime));
+        Picasso.get().load(url).into(image_button);
+        table_row_image.addView(image_button);
     }
 }

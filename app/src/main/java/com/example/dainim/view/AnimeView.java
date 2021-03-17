@@ -3,7 +3,7 @@ package com.example.dainim.view;
 import android.widget.TextView;
 
 import com.example.dainim.model.AnimeSeason;
-import com.example.dainim.model.Season;
+import com.example.dainim.model.EnumSeason;
 import com.example.dainim.model.Anime;
 
 import org.json.JSONException;
