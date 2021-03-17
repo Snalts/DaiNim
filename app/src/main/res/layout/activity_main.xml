@@ -31,48 +31,72 @@
             android:layout_height="match_parent"
             android:background="?attr/colorPrimary">
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:collapseColumns="2"> <!-- collapse the first column of the table row-->
+            <ScrollView
+                android:id="@+id/scrollView1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true" >
 
-
-                <!-- first row of the table layout-->
-                <TableRow
-                    android:id="@+id/row1"
+                <HorizontalScrollView
+                    android:id="@+id/hscrll1"
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent">
+                    android:layout_height="wrap_content" >
 
-                    <Button
-                        android:id="@+id/compte"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Button"
-                        android:layout_alignParentTop="true"
-                        android:background="@null" />
+                    <RelativeLayout
+                        android:id="@+id/RelativeLayout1"
+                        android:layout_width="fill_parent"
+                        android:layout_gravity="center"
+                        android:layout_height="fill_parent"
+                        android:orientation="vertical" >
 
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:id="@+id/view"
-                        android:clickable="true"
-                        android:onClick="clickNew"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:background="@null" />
+                        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                            android:id="@+id/tablelayout"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true">
 
-                    <ImageButton
-                        android:layout_width="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:id="@+id/view2"
-                        android:clickable="true"
-                        android:onClick="clickNew"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:background="@null" />
-                </TableRow>
+                            <!-- first row of the table layout
+                            <TableRow
+                                android:id="@+id/row1"
+                                android:layout_width="fill_parent"
+                                android:layout_height="fill_parent">
+                            </TableRow>-->
 
-            </TableLayout>
+                        </TableLayout>
+
+                        <Button
+                            android:id="@+id/compte"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Button"
+                            android:layout_alignParentTop="true"
+                            android:background="@null" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:id="@+id/view"
+                            android:clickable="true"
+                            android:onClick="clickNew"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:background="@null" />
+
+                        <ImageButton
+                            android:layout_width="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:id="@+id/view2"
+                            android:clickable="true"
+                            android:onClick="clickNew"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:background="@null" />
+
+                    </RelativeLayout>
+
+                </HorizontalScrollView>
+
+            </ScrollView>
 
         </FrameLayout>
 

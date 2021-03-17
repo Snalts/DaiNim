@@ -3,6 +3,8 @@ package com.example.dainim.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
@@ -15,10 +17,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.example.dainim.controller.AnimeClickListener;
 import com.example.dainim.model.Anime;
 import com.example.dainim.model.AnimeSeason;
 import com.example.dainim.model.EnumSeason;
+
 import com.firebase.ui.auth.AuthUI;
+
 import com.google.android.material.navigation.NavigationView;
 
 import com.example.dainim.R;
@@ -28,10 +33,10 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 
 import java.util.Arrays;
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
-
     //FOR DESIGN
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
@@ -39,8 +44,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AnimeView av;
     private Object obj;
     private TextView tv;
-    private Anime a2;
+    private Anime anime;
     private Intent intent;
+    private Anime a2;
     private static final int RC_SIGN_IN = 123;
 
     @Override
@@ -48,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        intent = new Intent(getApplicationContext(),animeFrame.class);
+        intent = new Intent(getApplicationContext(), AnimeActivity.class);
 
         // 6 - Configure all views
 
@@ -107,10 +113,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
 
         this.configureToolBar();
-
         this.configureDrawerLayout();
-
         this.configureNavigationView();
+        this.configureFrameLayout();
     }
 
 
@@ -190,9 +195,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         switch (id)
         {
-            case R.id.activity_main_drawer_news :
+            case R.id.activity_main_drawer_signup:
                 break;
-            case R.id.activity_main_drawer_profile:
+            case R.id.activity_main_drawer_login:
+                break;
+            case R.id.activity_main_drawer_planning:
                 break;
             case R.id.activity_main_drawer_settings:
                 break;
@@ -234,7 +241,49 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void configureFrameLayout()
     {
-        AnimeSeason anime_season = AnimeSeason.getInstance(new Object());
-            //anime_season.get
+        try
+        {
+            AnimeSeason anime_season = AnimeSeason.getInstance(new Object());
+            TableLayout table_layout = (TableLayout) findViewById(R.id.tablelayout);
+
+            int c = Calendar.getInstance().get(Calendar.YEAR);
+            EnumSeason e = EnumSeason.getThisSeason();
+
+            for(int i = 0; i < anime_season.getAnimeList(c, e).size(); i += 3)
+            {
+                TableRow table_row_image = new TableRow(this);
+
+                for(int j = 0; j < 3; j++)
+                {
+                    if(i + j < anime_season.getAnimeList(c, e).size())
+                    {
+                        displayAnime(anime_season, table_row_image, i + j);
+                    }
+                }
+
+                table_layout.addView(table_row_image);
+            }
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
+    }
+
+    private void displayAnime(AnimeSeason anime_season, TableRow table_row_image, int i) throws JSONException
+    {
+        int c = Calendar.getInstance().get(Calendar.YEAR);
+        EnumSeason e = EnumSeason.getThisSeason();
+
+        Anime anime = anime_season.getAnime(c, e, i);
+        String url = anime.getImage();
+        ImageButton image_button = new ImageButton(this);
+
+        //image_button.setMinimumHeight(500);
+        //image_button.setMinimumWidth(370);
+        image_button.setClickable(true);
+        image_button.setOnClickListener(new AnimeClickListener(this, this.intent, anime));
+        Picasso.get().load(url).into(image_button);
+        table_row_image.addView(image_button);
     }
 }

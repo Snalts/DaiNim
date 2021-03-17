@@ -11,14 +11,12 @@ import com.example.dainim.R;
 import com.example.dainim.model.Anime;
 import com.squareup.picasso.Picasso;
 
-import org.json.JSONException;
-
-public class animeFrame extends AppCompatActivity {
+public class AnimeActivity extends AppCompatActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anime_frame);
+        setContentView(R.layout.activity_anime);
         Intent intent = getIntent();
         Anime a = (Anime) intent.getSerializableExtra("anime");
         String url2 = null;
