@@ -48,7 +48,14 @@ public class ProfilActivity extends BaseActivity {
         this.update.setOnClickListener(new updateListener(this));
         this.signout = (Button)findViewById(R.id.profile_activity_button_sign_out);
         this.signout.setOnClickListener(new signoutListener(this));
+        this.delete = (Button) findViewById(R.id.profile_activity_button_delete);
         this.delete.setOnClickListener(new deleteListener(this));
+
+        this.textViewEmail = (TextView) findViewById(R.id.textViewEmail);
+        this.progressBar = findViewById(R.id.progressBar);
+        this.progressBar.setVisibility(INVISIBLE);
+        this.textInputEditTextUsername = findViewById(R.id.textUserName);
+
     }
 
     // --------------------
@@ -97,7 +104,7 @@ public class ProfilActivity extends BaseActivity {
 
             //Get email & username from Firebase
             String email = TextUtils.isEmpty(this.getCurrentUser().getEmail()) ? getString(R.string.info_no_email_found) : this.getCurrentUser().getEmail();
-
+            System.out.println("TEST email :" + this.getCurrentUser().getEmail());
             //Update views with data
             this.textViewEmail.setText(email);
 
