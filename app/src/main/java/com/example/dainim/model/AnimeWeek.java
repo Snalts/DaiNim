@@ -23,7 +23,7 @@ public class AnimeWeek {
         lastAdd = current;
     }
 
-    public AnimeWeek getInstance(Object obj){
+    public static AnimeWeek getInstance(Object obj){
         if (animeWeek == null) {
             try {
                 animeWeek = new AnimeWeek(obj);
@@ -43,7 +43,7 @@ public class AnimeWeek {
         return animeWeek.h_week_anime;
     }
 
-    public ArrayList<Anime> getCurrentWeek(){
+    public ArrayList<Anime> getCurrentDay(){
         return animeWeek.h_week_anime.get(animeWeek.current).getAnimeList();
     }
 
@@ -51,7 +51,7 @@ public class AnimeWeek {
         return animeWeek.h_week_anime.get(e).getAnimeList();
     }
 
-    public ArrayList<Anime> nextWeek(){
+    public ArrayList<Anime> nextDay(){
         animeWeek.lastAdd = EnumWeek.nextDay(animeWeek.current);
         if(!animeWeek.h_week_anime.containsKey(animeWeek.lastAdd)){
             animeWeek.setNewWeek(animeWeek.lastAdd);
@@ -59,7 +59,7 @@ public class AnimeWeek {
         return animeWeek.getWeek(animeWeek.lastAdd);
     }
 
-    public ArrayList<Anime> lastWeek(){
+    public ArrayList<Anime> previousDay(){
         animeWeek.lastAdd = EnumWeek.lastDay(animeWeek.current);
         if(!animeWeek.h_week_anime.containsKey(animeWeek.lastAdd)){
             animeWeek.setNewWeek(animeWeek.lastAdd);

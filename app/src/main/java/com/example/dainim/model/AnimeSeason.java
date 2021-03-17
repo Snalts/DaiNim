@@ -38,15 +38,15 @@ public final class AnimeSeason extends Thread {
         return animeSeason;
     }
     public void newSeason(int year, EnumSeason enumSeason) throws JSONException {
-        if((!animeSeason.dictionnary.containsValue(year)) && (!animeSeason.dictionnary.get(year).containsValue(enumSeason))){
-            animeSeason.year = year;
-            animeSeason.enumSeason = enumSeason;
-            animeSeason.setDictionnary(this.setValue());
+        if((!this.dictionnary.containsValue(year)) && (!this.dictionnary.get(year).containsValue(enumSeason))){
+            this.year = year;
+            this.enumSeason = enumSeason;
+            this.setDictionnary(this.setValue());
         }
     }
     private ArrayList<Anime> setValue() throws JSONException {
         ArrayList<Anime> anime_list = new ArrayList<Anime>();
-        String s_url = "https://api.jikan.moe/v3/season/"+ animeSeason.year + "/"+ animeSeason.enumSeason.getMinimum();
+        String s_url = "https://api.jikan.moe/v3/season/"+ this.year + "/"+ this.enumSeason.getMinimum();
         UrlConnect link = new UrlConnect(s_url,obj);
         try {
             link.start();
@@ -66,15 +66,15 @@ public final class AnimeSeason extends Thread {
     }
     private void setDictionnary(ArrayList<Anime> arrayList){
         HashMap<EnumSeason,ArrayList<Anime>> dic_season;
-        if(animeSeason.dictionnary.containsKey(year)){
-            dic_season = animeSeason.dictionnary.get(year);
+        if(this.dictionnary.containsKey(year)){
+            dic_season = this.dictionnary.get(year);
         }
         else{
             dic_season = new HashMap<EnumSeason,ArrayList<Anime>>();
         }
-        if(!dic_season.containsValue(animeSeason.enumSeason)){
-            dic_season.put(animeSeason.enumSeason,arrayList);
-            animeSeason.dictionnary.put(animeSeason.year,dic_season);
+        if(!dic_season.containsValue(this.enumSeason)){
+            dic_season.put(this.enumSeason,arrayList);
+            this.dictionnary.put(this.year,dic_season);
         }
     }
 
@@ -83,15 +83,15 @@ public final class AnimeSeason extends Thread {
      * @throws getting back JSONException if data not declare
      */
     public ArrayList<Anime> getAnimeList(int year,EnumSeason e){
-        return animeSeason.dictionnary.get(year).get(e);
+        return this.dictionnary.get(year).get(e);
     }
 
     public int getYear() {
-        return animeSeason.year;
+        return this.year;
     }
 
     public EnumSeason getEnumSeason() {
-        return animeSeason.enumSeason;
+        return this.enumSeason;
     }
 
     /*
@@ -99,7 +99,7 @@ public final class AnimeSeason extends Thread {
      * @throws getting back JSONException if data not declare
      */
     public Anime getAnime(int year,EnumSeason e,int index) throws JSONException {
-        return animeSeason.dictionnary.get(year).get(e).get(index);
+        return this.dictionnary.get(year).get(e).get(index);
     }
 
     /*
@@ -107,6 +107,6 @@ public final class AnimeSeason extends Thread {
      * Return Anim class to String
      */
     public String toString() {
-       return "Anime Season get " + animeSeason.dictionnary.toString();
+       return "Anime Season get " + this.dictionnary.toString();
     }
 }
