@@ -39,6 +39,7 @@ public class ProfilActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         this.configureAll();
         this.updateUIWhenCreating();
