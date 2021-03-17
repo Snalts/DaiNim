@@ -21,7 +21,7 @@
         </activity>
 
         <activity android:name=".view.AnimeActivity"></activity>
-
+        <activity android:name=".view.ProfilActivity"></activity>
         <activity android:name=".view.PlanningActivity"></activity>
     </application>
 

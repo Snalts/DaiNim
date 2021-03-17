@@ -39,7 +39,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         super.onCreate(savedInstanceState);
         intent_menu = new Intent(getApplicationContext(), MainActivity.class);
         intent_planning = new Intent(getApplicationContext(), PlanningActivity.class);
-        intent_profil = new Intent(getApplicationContext(), PlanningActivity.class);
+        intent_profil = new Intent(getApplicationContext(), ProfilActivity.class);
     }
 
     @Override
@@ -63,7 +63,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         switch (id)
         {
             case R.id.activity_main_drawer_signup:
-
+                startSignInActivity();
                 break;
             case R.id.activity_main_drawer_login:
                 if(isCurrentUserLogged()) {
