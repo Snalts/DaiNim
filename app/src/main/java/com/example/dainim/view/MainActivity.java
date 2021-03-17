@@ -24,6 +24,7 @@ import com.example.dainim.model.EnumSeason;
 
 import com.firebase.ui.auth.AuthUI;
 
+import com.google.android.material.internal.NavigationMenuItemView;
 import com.google.android.material.navigation.NavigationView;
 
 import com.example.dainim.R;
@@ -55,69 +56,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         intent = new Intent(getApplicationContext(), AnimeActivity.class);
+        obj = new Object();
 
         // 6 - Configure all views
-
-        try
-        {
-            obj = new Object();
-            Button b = (Button) findViewById(R.id.compte);
-
-            /*Connection button*/
-            b.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    this.startSignInActivity();
-                }
-                // 2 - Launch Sign-In Activity
-                public void startSignInActivity(){
-                    startActivityForResult(
-                            AuthUI.getInstance()
-                                    .createSignInIntentBuilder()
-                                    .setTheme(R.style.LoginTheme)
-                                    .setAvailableProviders(
-                                            Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build()))
-                                    .setIsSmartLockEnabled(false, true)
-                                    .setLogo(R.drawable.ic_logo_auth)
-                                    .build(),
-                            RC_SIGN_IN);
-                }
-            });
-
-
-            //AnimeSeason a = AnimeSeason.getInstance(obj);
-            // av = new AnimeView(1, tv, obj);
-
-            /*Anime a = av.getAnime();
-            String url = a.getImage();
-            ImageButton iv = (ImageButton) findViewById(R.id.view);
-            Picasso.get().load(url).into(iv);
-
-            this.a2 = new Anime(40028, obj);
-            String url2 = a2.getImage();
-            ImageButton iv2 = (ImageButton) findViewById(R.id.view2);
-
-            Picasso.get().load(url2).into(iv2);
-            */
-            /*InputStream is = (InputStream) new URL(url).getContent();
-            Drawable d = Drawable.createFromStream(is, "src name");*/
-            //iv.setImageDrawable(d);
-            //iv.setImageResource(R.drawable.ic_openclassrooms);
-           // System.out.println("Affichage dans le Main :" + a.getAnime(2021,EnumSeason.SPRING,0));
-           // System.out.println("Affichage dans le Main :" + a.getAnime(2021,EnumSeason.WINTER,0));
-
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-        }
 
         this.configureToolBar();
         this.configureDrawerLayout();
         this.configureNavigationView();
         this.configureFrameLayout();
     }
-
 
     public void clickNew(View v){
         intent.putExtra("anime",a2);
@@ -196,6 +143,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (id)
         {
             case R.id.activity_main_drawer_signup:
+                startActivityForResult(
+                        AuthUI.getInstance()
+                                .createSignInIntentBuilder()
+                                .setTheme(R.style.LoginTheme)
+                                .setAvailableProviders(
+                                        Arrays.asList(new AuthUI.IdpConfig.EmailBuilder().build()))
+                                .setIsSmartLockEnabled(false, true)
+                                .setLogo(R.drawable.ic_logo_auth)
+                                .build(),
+                        RC_SIGN_IN);
                 break;
             case R.id.activity_main_drawer_login:
                 break;

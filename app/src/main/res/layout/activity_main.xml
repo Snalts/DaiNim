@@ -54,43 +54,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerHorizontal="true">
-
-                            <!-- first row of the table layout
-                            <TableRow
-                                android:id="@+id/row1"
-                                android:layout_width="fill_parent"
-                                android:layout_height="fill_parent">
-                            </TableRow>-->
-
+                            
                         </TableLayout>
-
-                        <Button
-                            android:id="@+id/compte"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Button"
-                            android:layout_alignParentTop="true"
-                            android:background="@null" />
-
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:id="@+id/view"
-                            android:clickable="true"
-                            android:onClick="clickNew"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:background="@null" />
-
-                        <ImageButton
-                            android:layout_width="wrap_content"
-                            android:layout_alignParentRight="true"
-                            android:id="@+id/view2"
-                            android:clickable="true"
-                            android:onClick="clickNew"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:background="@null" />
 
                     </RelativeLayout>
 
