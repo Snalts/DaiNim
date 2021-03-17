@@ -17,6 +17,10 @@
                     android:icon="@drawable/baseline_android_black_18dp"
                     android:title="Connexion"/>
                 <item
+                    android:id="@+id/activity_main_drawer_menu"
+                    android:icon="@drawable/baseline_android_black_18dp"
+                    android:title="Menu principal"/>
+                <item
                     android:id="@+id/activity_main_drawer_planning"
                     android:icon="@drawable/baseline_android_black_18dp"
                     android:title="Planning"/>
