@@ -44,10 +44,9 @@ public class AnimeActivity extends BaseActivity {
                 if(isChecked){
                     updateAddArrayInFirebase(a);
                 }
-                else{
+                /*else{
                     updateDeleteArrayInFirebase(a);
-                }
-
+                }*/
             }
         });
     }
