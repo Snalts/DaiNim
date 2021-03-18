@@ -2,10 +2,15 @@ package com.example.dainim.model;
 
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.SimpleTimeZone;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Anime implements Serializable {
+public class Anime implements Serializable,Comparable<Anime> {
     private static final long serialVersionUID = 1350092881346723535L;
     private int id_anim;
     private String title;
@@ -74,5 +79,10 @@ public class Anime implements Serializable {
      */
     public String toString(){
         return "Titre : " + this.title + "| Url_Image" + this.url_image;
+    }
+
+    @Override
+    public int compareTo(Anime a) {
+        return this.time.compareTo(a.time);
     }
 }

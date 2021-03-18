@@ -1,8 +1,5 @@
 package com.example.dainim.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -13,8 +10,6 @@ import com.example.dainim.model.Anime;
 import com.squareup.picasso.Picasso;
 
 public class AnimeActivity extends BaseActivity {
-
-    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)

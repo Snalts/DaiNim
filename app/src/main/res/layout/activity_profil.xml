@@ -37,6 +37,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="44dp"
                 android:text="TextView"
+                android:textColor="#FFF"
+                android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintStart_toStartOf="parent"
@@ -109,12 +111,14 @@
         android:id="@+id/activity_main_nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:maxWidth="200dp"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/activity_main_nav_header"
         app:menu="@menu/activity_main_menu_drawer"
         android:background="?attr/colorPrimary"
-        app:itemTextColor="@color/white"/>
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/white"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
 

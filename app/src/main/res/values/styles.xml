@@ -3,7 +3,7 @@
 
     <!-- STYLE SIGN-IN ACTIVITY -->
     <style name="LoginTheme" parent="Theme.DaiNim">
-        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimary">@color/dark_2</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorButtonNormal">@color/colorAccent</item>

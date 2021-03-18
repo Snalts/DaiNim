@@ -39,7 +39,7 @@ public class ProfilActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
         this.configureAll();
-        this.updateUIWhenCreating();
+
         this.update = (Button)findViewById(R.id.profile_activity_button_update);
         this.update.setOnClickListener(new UpdateListener(this));
         this.signout = (Button)findViewById(R.id.profile_activity_button_sign_out);
@@ -51,6 +51,7 @@ public class ProfilActivity extends BaseActivity {
         this.progressBar = findViewById(R.id.progressBar);
         this.progressBar.setVisibility(INVISIBLE);
         this.textInputEditTextUsername = findViewById(R.id.textUserName);
+        this.updateUIWhenCreating();
 
     }
 
@@ -113,6 +114,8 @@ public class ProfilActivity extends BaseActivity {
                     textInputEditTextUsername.setText(username);
                 }
             });
+            //this.updateaddArrayInFirebase();
+            this.updatedeleteArrayInFirebase();
         }
     }
 

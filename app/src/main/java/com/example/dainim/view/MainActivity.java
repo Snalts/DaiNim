@@ -2,13 +2,10 @@ package com.example.dainim.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
-import androidx.core.content.ContextCompat;
 
 import com.example.dainim.controller.AnimeClickListener;
 import com.example.dainim.model.Anime;
@@ -82,6 +79,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
+
+
     private void displayAnime(AnimeSeason anime_season, TableRow table_row_image, int i) throws JSONException
     {
         int c = Calendar.getInstance().get(Calendar.YEAR);
@@ -99,4 +98,5 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Picasso.get().load(url).into(image_button);
         table_row_image.addView(image_button);
     }
+
 }
