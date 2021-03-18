@@ -2,7 +2,6 @@ package com.example.dainim.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.MenuItem;
 
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -30,8 +29,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import reactor.util.annotation.Nullable;
-
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int RC_SIGN_IN = 123;
 
@@ -41,8 +38,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     private Intent intent_menu;
     private Intent intent_planning;
     private Intent intent_profil;
-    private User currentUser;
+    protected User currentUser;
     private List<Anime> arr;
+    private Boolean b;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +70,7 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 break;
             case R.id.activity_main_drawer_login:
                 if (isCurrentUserLogged()) {
+                    this.getUserInFireBase();
                     startActivity(intent_profil);
                 } else {
                     startSignInActivity();
@@ -151,12 +150,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         if (requestCode == RC_SIGN_IN) {
             if (resultCode == RESULT_OK) { // SUCCESS
                 this.createUserInFirestore();
+                this.getUserInFireBase();
             }
         }
     }
 
     private void createUserInFirestore() {
-
         if (this.getCurrentUser() != null) {
             ArrayList<Anime> arr_list = new ArrayList<Anime>();
             String username = this.getCurrentUser().getDisplayName();
@@ -166,39 +165,47 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
     }
 
-    protected void updateaddArrayInFirebase(){
+    protected void updateAddArrayInFirebase(Anime a){
         UserHelper.getUser(this.getCurrentUser().getUid()).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 currentUser = documentSnapshot.toObject(User.class);
                 System.out.println(currentUser.getFav_list());
                 arr = currentUser.getFav_list();
-                try {
-                    arr.add(new Anime(1,new Object()));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+                arr.add(a);
                 UserHelper.updateFavAnime(currentUser.getuId(),arr);
             }
         });
     }
 
-    protected void updatedeleteArrayInFirebase() {
+    protected void updateDeleteArrayInFirebase(Anime a) {
         UserHelper.getUser(this.getCurrentUser().getUid()).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 currentUser = documentSnapshot.toObject(User.class);
-                System.out.println(currentUser.getFav_list());
+                System.out.println("Test" + currentUser.getFav_list());
                 arr = currentUser.getFav_list();
-                try {
-                    arr.remove(new Anime(1, new Object()));
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                int id = arr.indexOf(a);
+                System.out.println(id);
+                if(id != -1) {
+                    arr.remove(id);
+                    System.out.println("Arr");
+                    UserHelper.updateFavAnime(currentUser.getuId(), arr);
                 }
-                UserHelper.updateFavAnime(currentUser.getuId(), arr);
             }
         });
     }
+
+    protected void getUserInFireBase() {
+        UserHelper.getUser(this.getCurrentUser().getUid()).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                currentUser = documentSnapshot.toObject(User.class);
+
+            }
+        });
+    }
+
     protected FirebaseUser getCurrentUser() {
         return FirebaseAuth.getInstance().getCurrentUser();
     }

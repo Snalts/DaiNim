@@ -114,8 +114,6 @@ public class ProfilActivity extends BaseActivity {
                     textInputEditTextUsername.setText(username);
                 }
             });
-            //this.updateaddArrayInFirebase();
-            this.updatedeleteArrayInFirebase();
         }
     }
 

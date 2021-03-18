@@ -19,6 +19,8 @@ public class Anime implements Serializable,Comparable<Anime> {
     private String time;
 
 
+    public Anime(){}
+
     public Anime(int id,Object obj) throws InterruptedException {
         this.id_anim = id;
         String s_url = "https://api.jikan.moe/v3/anime/" + id_anim;
@@ -78,7 +80,7 @@ public class Anime implements Serializable,Comparable<Anime> {
       * Return Anim class to String
      */
     public String toString(){
-        return "Titre : " + this.title + "| Url_Image" + this.url_image;
+        return "Titre : " + this.title + "| Url_Image" + this.url_image + " Synopsis" + this.synopsis;
     }
 
     @Override

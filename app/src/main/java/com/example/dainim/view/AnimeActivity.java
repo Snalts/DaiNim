@@ -5,7 +5,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.dainim.R;
@@ -15,7 +17,7 @@ import com.squareup.picasso.Picasso;
 public class AnimeActivity extends BaseActivity {
 
     private Toolbar toolbar;
-
+    private Switch follow;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -37,5 +39,19 @@ public class AnimeActivity extends BaseActivity {
         v1.setText(a.getSynopsis());
 
         this.configureAll();
+        this.follow = findViewById(R.id.switchFollow);
+        this.follow.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    updateAddArrayInFirebase(a);
+                }
+                else{
+                    updateDeleteArrayInFirebase(a);
+                }
+
+            }
+        });
     }
+
 }
