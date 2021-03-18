@@ -62,10 +62,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
 
         switch (id)
         {
-            case R.id.activity_main_drawer_signup:
+            /*case R.id.activity_main_drawer_signup:
                 startSignInActivity();
-                break;
-            case R.id.activity_main_drawer_login:
+                break;*/
+            case R.id.activity_main_drawer_profil:
                 if(isCurrentUserLogged()) {
                     startActivity(intent_profil);
                 }
