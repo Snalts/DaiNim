@@ -14,7 +14,6 @@ import com.squareup.picasso.Picasso;
 
 public class AnimeActivity extends BaseActivity {
 
-    private Toolbar toolbar;
     private Switch follow;
     @Override
     protected void onCreate(Bundle savedInstanceState)

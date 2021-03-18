@@ -42,6 +42,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     private List<Anime> arr;
     private Boolean b;
 
+    /**
+     *
+     * @param savedInstanceState
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         intent_menu = new Intent(getApplicationContext(), MainActivity.class);
