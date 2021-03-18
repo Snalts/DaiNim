@@ -8,10 +8,10 @@ import androidx.appcompat.app.AlertDialog;
 import com.example.dainim.R;
 import com.example.dainim.view.ProfilActivity;
 
-public class deleteListener implements View.OnClickListener {
+public class DeleteListener implements View.OnClickListener {
     private ProfilActivity profilActivity;
 
-    public deleteListener(ProfilActivity profilActivity){
+    public DeleteListener(ProfilActivity profilActivity){
         this.profilActivity = profilActivity;
     }
     @Override

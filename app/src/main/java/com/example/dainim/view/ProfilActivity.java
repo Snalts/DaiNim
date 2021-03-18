@@ -1,20 +1,16 @@
 package com.example.dainim.view;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.dainim.R;
-import com.example.dainim.controller.deleteListener;
-import com.example.dainim.controller.signoutListener;
-import com.example.dainim.controller.updateListener;
+import com.example.dainim.controller.DeleteListener;
+import com.example.dainim.controller.SignoutListener;
+import com.example.dainim.controller.UpdateListener;
 import com.example.dainim.model.User;
-
-import androidx.appcompat.app.AlertDialog;
 
 import com.example.dainim.controller.UserHelper;
 import com.firebase.ui.auth.AuthUI;
@@ -43,18 +39,19 @@ public class ProfilActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
         this.configureAll();
-        this.updateUIWhenCreating();
+
         this.update = (Button)findViewById(R.id.profile_activity_button_update);
-        this.update.setOnClickListener(new updateListener(this));
+        this.update.setOnClickListener(new UpdateListener(this));
         this.signout = (Button)findViewById(R.id.profile_activity_button_sign_out);
-        this.signout.setOnClickListener(new signoutListener(this));
+        this.signout.setOnClickListener(new SignoutListener(this));
         this.delete = (Button) findViewById(R.id.profile_activity_button_delete);
-        this.delete.setOnClickListener(new deleteListener(this));
+        this.delete.setOnClickListener(new DeleteListener(this));
 
         this.textViewEmail = (TextView) findViewById(R.id.textViewEmail);
         this.progressBar = findViewById(R.id.progressBar);
         this.progressBar.setVisibility(INVISIBLE);
         this.textInputEditTextUsername = findViewById(R.id.textUserName);
+        this.updateUIWhenCreating();
 
     }
 
@@ -117,6 +114,8 @@ public class ProfilActivity extends BaseActivity {
                     textInputEditTextUsername.setText(username);
                 }
             });
+            //this.updateaddArrayInFirebase();
+            this.updatedeleteArrayInFirebase();
         }
     }
 

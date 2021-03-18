@@ -14,12 +14,15 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.dainim.controller.AnimeClickListener;
+import com.example.dainim.controller.UserHelper;
 import com.example.dainim.model.Anime;
 import com.example.dainim.model.AnimeSeason;
 import com.example.dainim.model.EnumSeason;
 
 import com.firebase.ui.auth.AuthUI;
 
+import com.firebase.ui.auth.ErrorCodes;
+import com.firebase.ui.auth.IdpResponse;
 import com.google.android.material.navigation.NavigationView;
 
 import com.example.dainim.R;
@@ -27,6 +30,7 @@ import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
@@ -145,6 +149,8 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
+
+
     private void displayAnime(AnimeSeason anime_season, TableRow table_row_image, int i) throws JSONException
     {
         int c = Calendar.getInstance().get(Calendar.YEAR);
@@ -161,4 +167,5 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Picasso.get().load(url).into(image_button);
         table_row_image.addView(image_button);
     }
+
 }

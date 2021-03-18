@@ -4,14 +4,14 @@ import android.view.View;
 
 import com.example.dainim.view.ProfilActivity;
 
-public class signoutListener implements View.OnClickListener {
+public class UpdateListener implements View.OnClickListener {
     private ProfilActivity profilActivity;
 
-    public signoutListener(ProfilActivity profilActivity){
+    public UpdateListener(ProfilActivity profilActivity){
         this.profilActivity = profilActivity;
     }
     @Override
     public void onClick(View v) {
-        profilActivity.signOutUserFromFirebase();
+        profilActivity.updateUsernameInFirebase();
     }
 }

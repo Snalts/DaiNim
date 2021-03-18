@@ -23,6 +23,15 @@
         <activity android:name=".view.AnimeActivity"></activity>
         <activity android:name=".view.ProfilActivity"></activity>
         <activity android:name=".view.PlanningActivity"></activity>
+
+        <!--Notification-->
+        <service android:name=".controller.NotificationService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+            </intent-filter>
+
+        </service>
+
     </application>
 
 </manifest>
