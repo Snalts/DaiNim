@@ -1,28 +1,53 @@
 package com.example.dainim.model;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * AnimeWeek class, get all anime for the week, implement Singleton pattern
+ */
 public class AnimeWeek {
-
-    private HashMap<EnumWeek,AnimeDay> h_week_anime;
+    /**
+     *
+     */
+    private HashMap<EnumWeek,AnimeDay> dictionary_week;
+    /**
+     * getCurrent day in the week
+     */
     private EnumWeek current;
+    /**
+     * LastDay add in AnimeWeek
+     */
     private EnumWeek lastAdd;
+    /**
+     * Singleton pattern, instance one time
+     */
     private static AnimeWeek animeWeek;
+    /**
+     * Need for UrlConnect
+     */
     public Object obj;
 
+    /**
+     * Constructor
+     * @param obj Object
+     * @throws InterruptedException if interrupted
+     * @throws JSONException if data not found
+     */
     private AnimeWeek(Object obj) throws InterruptedException, JSONException {
         this.obj = obj;
-        h_week_anime = new HashMap<EnumWeek,AnimeDay>();
+        dictionary_week = new HashMap<>();
         current = EnumWeek.getCurrent();
-        h_week_anime.put(current,new AnimeDay(current,obj));
+        dictionary_week.put(current,new AnimeDay(current,obj));
         lastAdd = current;
     }
 
+    /**
+     * Singleton Pattern, need just one instance
+     * @param obj Object
+     * @return AnimeWeek instance
+     */
     public static AnimeWeek getInstance(Object obj){
         if (animeWeek == null) {
             try {
@@ -35,41 +60,62 @@ public class AnimeWeek {
         }
         return animeWeek;
     }
-    /*
-     * ArrayList<Anime> return the list of anime.
-     * @throws getting back JSONException if data not declare
+
+    /**
+     * getAnimeDictionnary, return all day instance in the dictionary
+     * @return HashMap<EnumWeek,AnimeDay></EnumWeek,AnimeDay>
      */
-    public HashMap<EnumWeek,AnimeDay> getAnimeList(){
-        return animeWeek.h_week_anime;
+    public HashMap<EnumWeek,AnimeDay> getAnimeDictionary(){
+        return this.dictionary_week;
     }
 
+    /**
+     * getCurrentDay, return animeList for currentDay
+     * @return ArrayList<Anime>
+     */
     public ArrayList<Anime> getCurrentDay(){
-        return animeWeek.h_week_anime.get(animeWeek.current).getAnimeList();
+        return this.dictionary_week.get(animeWeek.current).getAnimeList();
     }
 
-    public ArrayList<Anime> getWeek(EnumWeek e){
-        return animeWeek.h_week_anime.get(e).getAnimeList();
+    /**
+     * getWeek, get all anime for one day
+     * @param day EnumWeek
+     * @return ArrayList<Anime></Anime>
+     */
+    public ArrayList<Anime> getWeek(EnumWeek day){
+        return this.dictionary_week.get(day).getAnimeList();
     }
 
+    /**
+     * Instance next day in the dictionary and return result
+     * @return ArrayList<Anime></Anime>
+     */
     public ArrayList<Anime> getNextDay(){
-        animeWeek.lastAdd = EnumWeek.nextDay(animeWeek.lastAdd);
-        if(!animeWeek.h_week_anime.containsKey(animeWeek.lastAdd)){
-            animeWeek.setNewWeek(animeWeek.lastAdd);
+        this.lastAdd = EnumWeek.nextDay(this.lastAdd);
+        if(!this.dictionary_week.containsKey(this.lastAdd)){
+            this.setNewWeek(this.lastAdd);
         }
-        return animeWeek.getWeek(animeWeek.lastAdd);
+        return this.getWeek(this.lastAdd);
     }
-
+    /**
+     * Instance previous day in the dictionary and return result
+     * @return ArrayList<Anime></Anime>
+     */
     public ArrayList<Anime> getPreviousDay(){
-        animeWeek.lastAdd = EnumWeek.lastDay(animeWeek.lastAdd);
-        if(!animeWeek.h_week_anime.containsKey(animeWeek.lastAdd)){
-            animeWeek.setNewWeek(animeWeek.lastAdd);
+        this.lastAdd = EnumWeek.previousDay(this.lastAdd);
+        if(!this.dictionary_week.containsKey(this.lastAdd)){
+            this.setNewWeek(this.lastAdd);
         }
-        return animeWeek.getWeek(animeWeek.lastAdd);
+        return this.getWeek(this.lastAdd);
     }
 
+    /**
+     * set new day in the dictionary
+     * @param newDay EnumWeek
+     */
     private void setNewWeek(EnumWeek newDay) {
         try {
-            animeWeek.h_week_anime.put(newDay,new AnimeDay(newDay,this.obj));
+            this.dictionary_week.put(newDay,new AnimeDay(newDay,this.obj));
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (JSONException e) {
@@ -77,18 +123,20 @@ public class AnimeWeek {
         }
     }
 
-    /*
-     * getAnime return the Japanese style.
-     * @throws getting back JSONException if data not declare
+    /**
+     * get all anime in one Day
+     * @param day EnumWeek
+     * @return AnimeDay
      */
-    public AnimeDay getAnime(EnumWeek e) throws JSONException {
-        return animeWeek.h_week_anime.get(e);
+    public AnimeDay getAnimeDay(EnumWeek day) {
+        return this.dictionary_week.get(day);
     }
+
     /*
      * Method toString
-     * Return Anim class to String
+     * Return AnimeWeek class to String
      */
     public String toString() {
-        return "Anime list " + animeWeek.h_week_anime.toString();
+        return "Anime list " + this.dictionary_week.toString();
     }
 }

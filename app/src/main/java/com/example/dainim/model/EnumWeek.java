@@ -4,18 +4,33 @@ package com.example.dainim.model;
 import java.util.Calendar;
 import java.lang.String;
 
+/**
+ * Define EnumWeek, can return the actual day
+ */
 public enum EnumWeek {
     MONDAY("monday"),TUESDAY("tuesday"),WEDNESDAY("wednesday"),THURSDAY("thursday"),FRIDAY("friday"),SATURDAY("saturday"),SUNDAY("sunday");
-    private String minimum;
+    private final String minimum;
 
-    private EnumWeek(String minimum){
+    /**
+     * Constructor
+     * @param minimum String
+     */
+    EnumWeek(String minimum){
         this.minimum = minimum;
     }
 
+    /**
+     * For request API
+     * @return minimum String
+     */
     public String getMinimum() {
         return minimum;
     }
 
+    /**
+     * getCurrent day
+     * @return EnumWeek
+     */
     public static EnumWeek getCurrent(){
         Calendar c = Calendar.getInstance();
         int day = c.get(Calendar.DAY_OF_WEEK);
@@ -37,8 +52,14 @@ public enum EnumWeek {
             default: return EnumWeek.MONDAY;
         }
     }
-    public static EnumWeek nextDay(EnumWeek e){
-        switch(e){
+
+    /**
+     *  get one day, and return the next day
+     * @param day
+     * @return EnumWeek
+     */
+    public static EnumWeek nextDay(EnumWeek day){
+        switch(day){
             case MONDAY:
                 return EnumWeek.TUESDAY;
             case TUESDAY:
@@ -56,8 +77,13 @@ public enum EnumWeek {
             default: return EnumWeek.MONDAY;
         }
     }
-    public static EnumWeek lastDay(EnumWeek e){
-        switch(e){
+    /**
+     *  get one day, and return the previous day
+     * @param day
+     * @return EnumWeek
+     */
+    public static EnumWeek previousDay(EnumWeek day){
+        switch(day){
             case MONDAY:
                 return EnumWeek.SUNDAY;
             case TUESDAY:

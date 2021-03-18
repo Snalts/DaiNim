@@ -21,12 +21,26 @@ import org.json.JSONException;
 
 import java.util.Calendar;
 
+/**
+ * Class implementing the main page activity
+ */
 public class MainActivity extends BaseActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     //FOR DESIGN
+    /**
+     * Object that synchronize the thread used in UrlConnect
+     */
     private Object obj;
+
+    /**
+     * Intent that create the anime activity when anime buttons are clicked
+     */
     private Intent intent;
 
+    /**
+     * Method called when MainActivity is created
+     * @param savedInstanceState The activity saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -44,7 +58,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     // CONFIGURATION
     // ---------------------
 
-    // Configure FrameLayout
+    /**
+     * Method that configure the activity frame layout
+     */
     private void configureFrameLayout()
     {
         try
@@ -79,8 +95,13 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         }
     }
 
-
-
+    /**
+     * Method that displays all animes from the current season
+     * @param anime_season The current season
+     * @param table_row_image A row of animes' images
+     * @param i The index of the anime to display in the anime list
+     * @throws JSONException Catched when anime data don't exist
+     */
     private void displayAnime(AnimeSeason anime_season, TableRow table_row_image, int i) throws JSONException
     {
         int c = Calendar.getInstance().get(Calendar.YEAR);
@@ -98,5 +119,4 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
         Picasso.get().load(url).into(image_button);
         table_row_image.addView(image_button);
     }
-
 }

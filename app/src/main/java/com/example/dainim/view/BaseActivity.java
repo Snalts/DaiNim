@@ -29,30 +29,66 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Abtstract class implementing the base of all the application activities
+ */
 public abstract class BaseActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int RC_SIGN_IN = 123;
 
+    /**
+     * The application toolbar
+     */
     private Toolbar toolbar;
-    private NavigationView navigationView;
-    private DrawerLayout drawerLayout;
-    private Intent intent_menu;
-    private Intent intent_planning;
-    private Intent intent_profil;
-    protected User currentUser;
-    private List<Anime> arr;
-    private Boolean b;
 
     /**
-     *
-     * @param savedInstanceState
+     * The navigation menu's navigation view
      */
+    private NavigationView navigationView;
+
+    /**
+     * The main layout of all activities
+     */
+    private DrawerLayout drawerLayout;
+
+    /**
+     * The intent that start the main activity
+     */
+    private Intent intent_menu;
+
+    /**
+     * The intent that start the planning activity
+     */
+    private Intent intent_planning;
+
+    /**
+     * The intent that start the profile activity
+     */
+    private Intent intent_profile;
+
+    /**
+     * The current logged in user
+     */
+    protected User currentUser;
+
+    /**
+     * The user's favorite animes list
+     */
+    private List<Anime> arr;
+
+    /*
+     * Method called when BaseActivity is created
+     * @param savedInstanceState The activity saved instance state
+    */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         intent_menu = new Intent(getApplicationContext(), MainActivity.class);
         intent_planning = new Intent(getApplicationContext(), PlanningActivity.class);
-        intent_profil = new Intent(getApplicationContext(), ProfilActivity.class);
+        intent_profile = new Intent(getApplicationContext(), ProfileActivity.class);
     }
 
+    /**
+     * Method that close the menu when a back click is performed
+     */
     @Override
     public void onBackPressed() {
         // 5 - Handle back click to close menu
@@ -63,6 +99,11 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
     }
 
+    /**
+     * Method starting activities when menu buttons are clicked
+     * @param item The clicked menu button
+     * @return Always return true if successfully called
+     */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // 4 - Handle Navigation Item Click
@@ -72,17 +113,20 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
             /*case R.id.activity_main_drawer_profil:
                 startSignInActivity();
                 break;*/
+            // Profile page
             case R.id.activity_main_drawer_profil:
                 if (isCurrentUserLogged()) {
                     this.getUserInFireBase();
-                    startActivity(intent_profil);
+                    startActivity(intent_profile);
                 } else {
                     startSignInActivity();
                 }
                 break;
+            // Main page
             case R.id.activity_main_drawer_menu:
                 startActivity(intent_menu);
                 break;
+            // Planning page
             case R.id.activity_main_drawer_planning:
                 startActivity(intent_planning);
                 break;
@@ -99,22 +143,34 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     // CONFIGURATION
     // ---------------------
 
+    /**
+     * Method that call all configuration methods
+     */
     protected void configureAll() {
         this.configureToolBar();
         this.configureDrawerLayout();
         this.configureNavigationView();
     }
 
+    /**
+     * Method that sets up the activity toolbar
+     */
     private void configureToolBar() {
         this.toolbar = (Toolbar) findViewById(R.id.activity_main_toolbar);
         setSupportActionBar(toolbar);
     }
 
+    /**
+     * Method that sets up the activity navigation view
+     */
     private void configureNavigationView() {
         this.navigationView = (NavigationView) findViewById(R.id.activity_main_nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
 
+    /**
+     * Method that sets up the activity drawer layout
+     */
     private void configureDrawerLayout() {
         this.drawerLayout = (DrawerLayout) findViewById(R.id.activity_main_drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, this.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);

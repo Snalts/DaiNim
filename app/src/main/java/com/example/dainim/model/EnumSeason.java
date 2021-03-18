@@ -1,28 +1,37 @@
 package com.example.dainim.model;
-
-
-import android.os.Build;
-
-import androidx.annotation.RequiresApi;
-
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 
+/**
+ * Enum EnumSeason, can return actual season and define enum Season
+ */
 public enum EnumSeason {
     SUMMER("summer"),SPRING("spring"),FALL("fall"),WINTER("winter");
-    private String minimum;
+    /**
+     * For request in API
+     */
+    private final String minimum;
 
-    private EnumSeason(String minimum){
+    /**
+     * Constructor
+     * @param minimum String
+     */
+    EnumSeason(String minimum){
         this.minimum = minimum;
     }
 
+    /**
+     *  return minimum for Enum
+     * @return minimum
+     */
     public String getMinimum() {
         return minimum;
     }
 
+    /**
+     * get the actual season
+     * @return EnumSeason
+     */
     public static EnumSeason getThisSeason(){
         EnumSeason retour;
         Date date = new Date();

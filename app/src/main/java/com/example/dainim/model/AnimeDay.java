@@ -6,20 +6,35 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * AnimeDay , get a data Anime for one day
+ */
 public class AnimeDay {
-
+    /**
+     * ArrayList<Anime> Contains all Anime going out in one day
+     */
     private ArrayList<Anime> anime_day_list;
-    private JSONObject data;
+
+    /**
+     * EnumWeek, Contains all day in Enumeration
+     */
     private EnumWeek enumday;
 
+    /**
+     * Constructor for class AnimeDay
+     * @param enumDay Enumeration for day
+     * @param obj Need for UrlConnect to Synchronize thread
+     * @throws InterruptedException If the application has interrupted
+     * @throws JSONException If the JSONObject data not found
+     */
     public AnimeDay(EnumWeek enumDay, Object obj) throws InterruptedException, JSONException {
-        anime_day_list = new ArrayList<Anime>();
+        anime_day_list = new ArrayList<>();
         this.enumday = enumDay;
         String s_url = "https://api.jikan.moe/v3/schedule/" + enumday.getMinimum();
         UrlConnect link = new UrlConnect(s_url,obj);
         link.start();
         link.join();
-        data = link.getData();
+        JSONObject data = link.getData();
         JSONArray arr_data = data.getJSONArray(enumday.getMinimum());
         AnimeCheckTv check = new AnimeCheckTv();
         for(int i=0;i < arr_data.length()-1;i++){
@@ -29,24 +44,27 @@ public class AnimeDay {
         }
     }
 
-    /*
-     * ArrayList<Anime> return the list of anime.
-     * @throws getting back JSONException if data not declare
+
+    /**
+     * return the list of anime for one Day
+     * @return ArrayList<Anime>
      */
     public ArrayList<Anime> getAnimeList(){
         return anime_day_list;
     }
 
-    /*
-     * getAnime return the Japanese style.
-     * @throws getting back JSONException if data not declare
+    /**
+     * Return one Anime in list anime Day
+     * @param index Index in anime list
+     * @return Anime
      */
-    public Anime getAnime(int index) throws JSONException {
+    public Anime getAnime(int index){
         return anime_day_list.get(index);
     }
-    /*
-     * Method toString
-     * Return Anim class to String
+
+    /**
+     * toString
+     * @return Anime class to String
      */
     public String toString() {
         return "Anime list " + anime_day_list.toString();
