@@ -60,5 +60,4 @@ dependencies {
     implementation 'com.firebaseui:firebase-ui-auth:7.1.1'
     implementation group: 'com.google.firebase', name: 'firebase-firestore', version: '22.1.1'
     implementation group: 'com.google.firebase', name: 'firebase-messaging', version: '21.0.1'
-
 }

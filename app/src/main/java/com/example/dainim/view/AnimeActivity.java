@@ -6,16 +6,25 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.example.dainim.R;
 import com.example.dainim.model.Anime;
 import com.squareup.picasso.Picasso;
 
-public class AnimeActivity extends BaseActivity {
-
-    private Toolbar toolbar;
+/**
+ * Class implementing the anime page activity
+ */
+public class AnimeActivity extends BaseActivity
+{
+    /**
+     * The switch that allows the user to add the anime to his favorites
+     */
     private Switch follow;
+
+    /**
+     * Method called when AnimeActivity is created
+     * @param savedInstanceState The activity saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -25,10 +34,13 @@ public class AnimeActivity extends BaseActivity {
         Anime a = (Anime) intent.getSerializableExtra("anime");
         String url2 = null;
 
+        // Anime image
         url2 = a.getImage();
         //url2 = intent.getStringExtra("url_image");
         ImageView iv2 = (ImageView) findViewById(R.id.ImageAnime);
         Picasso.get().load(url2).into(iv2);
+
+        // Anime texts data
         TextView v = (TextView) findViewById(R.id.textTitle);
         v.setText(a.getTitle());
         //v.setText(intent.getStringExtra("title"));

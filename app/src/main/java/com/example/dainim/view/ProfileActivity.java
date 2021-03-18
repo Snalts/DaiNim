@@ -20,7 +20,10 @@ import com.google.firebase.firestore.DocumentSnapshot;
 
 import static android.view.View.*;
 
-public class ProfilActivity extends BaseActivity {
+/**
+ * Class implementing the profile page activity
+ */
+public class ProfileActivity extends BaseActivity {
     protected TextInputEditText textInputEditTextUsername;
     protected TextView textViewEmail;
     protected ProgressBar progressBar;
@@ -33,6 +36,10 @@ public class ProfilActivity extends BaseActivity {
     private static final int DELETE_USER_TASK = 20;
     private static final int UPDATE_USERNAME = 30;
 
+    /**
+     * Method called when ProfileActivity is created
+     * @param savedInstanceState The activity saved instance state
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

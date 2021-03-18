@@ -2,12 +2,12 @@ package com.example.dainim.controller;
 
 import android.view.View;
 
-import com.example.dainim.view.ProfilActivity;
+import com.example.dainim.view.ProfileActivity;
 
 public class SignoutListener implements View.OnClickListener {
-    private ProfilActivity profilActivity;
+    private ProfileActivity profilActivity;
 
-    public SignoutListener(ProfilActivity profilActivity){
+    public SignoutListener(ProfileActivity profilActivity){
         this.profilActivity = profilActivity;
     }
     @Override
