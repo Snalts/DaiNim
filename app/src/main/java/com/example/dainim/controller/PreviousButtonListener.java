@@ -31,6 +31,6 @@ public class PreviousButtonListener implements View.OnClickListener
     @Override
     public void onClick(View v)
     {
-        this.planning_activity.displayPlanning(this.planning_activity.getAnimeWeek().getPreviousDay(), EnumWeek.lastDay(this.planning_activity.getEnumWeek()));
+        this.planning_activity.displayPlanning(this.planning_activity.getAnimeWeek().getPreviousDay(), EnumWeek.previousDay(this.planning_activity.getEnumWeek()));
     }
 }

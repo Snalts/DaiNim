@@ -4,14 +4,24 @@ import android.view.View;
 
 import com.example.dainim.view.ProfileActivity;
 
+/**
+ * Event Sign out FireBase
+ */
 public class SignoutListener implements View.OnClickListener {
-    private ProfileActivity profilActivity;
+    /**
+     * ProfileActivity
+     */
+    private ProfileActivity profileActivity;
 
-    public SignoutListener(ProfileActivity profilActivity){
-        this.profilActivity = profilActivity;
+    /**
+     * Constructor
+     * @param profileActivity ProfileActivity
+     */
+    public SignoutListener(ProfileActivity profileActivity){
+        this.profileActivity = profileActivity;
     }
     @Override
     public void onClick(View v) {
-        profilActivity.signOutUserFromFirebase();
+        profileActivity.signOutUserFromFirebase();
     }
 }

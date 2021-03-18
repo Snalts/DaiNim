@@ -182,6 +182,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
     // UTILS
     // --------------------
 
+    /**
+     * startSignInActivity, change windows and start authentication to data base
+     */
     protected void startSignInActivity() {
         startActivityForResult(
                 AuthUI.getInstance()
@@ -201,6 +204,12 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         this.handleResponseAfterSignIn(requestCode, resultCode, data);
     }
 
+    /**
+     * handleResponseAfterSignIn, add User to data base
+     * @param requestCode int
+     * @param resultCode int
+     * @param data Intent
+     */
     private void handleResponseAfterSignIn(int requestCode, int resultCode, Intent data) {
 
         IdpResponse response = IdpResponse.fromResultIntent(data);
@@ -213,6 +222,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
     }
 
+    /**
+     * createUserInFirestore, Create user in data base
+     */
     private void createUserInFirestore() {
         if (this.getCurrentUser() != null) {
             ArrayList<Anime> arr_list = new ArrayList<Anime>();
@@ -223,27 +235,35 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
     }
 
-    protected void updateAddArrayInFirebase(Anime a){
+    /**
+     * updateAddArrayInFirebase, add new Anime in favorite array User
+     * @param anime
+     */
+    protected void updateAddArrayInFirebase(Anime anime){
         UserHelper.getUser(this.getCurrentUser().getUid()).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 currentUser = documentSnapshot.toObject(User.class);
                 System.out.println(currentUser.getFav_list());
                 arr = currentUser.getFav_list();
-                arr.add(a);
+                arr.add(anime);
                 UserHelper.updateFavAnime(currentUser.getuId(),arr);
             }
         });
     }
 
-    protected void updateDeleteArrayInFirebase(Anime a) {
+    /**
+     * updateDeleteArrayInFirebase, delete Anime in favorite array User
+     * @param anime
+     */
+    protected void updateDeleteArrayInFirebase(Anime anime) {
         UserHelper.getUser(this.getCurrentUser().getUid()).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 currentUser = documentSnapshot.toObject(User.class);
                 System.out.println("Test" + currentUser.getFav_list());
                 arr = currentUser.getFav_list();
-                int id = arr.indexOf(a);
+                int id = arr.indexOf(anime);
                 System.out.println(id);
                 if(id != -1) {
                     arr.remove(id);
@@ -254,6 +274,9 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         });
     }
 
+    /**
+     * getUserInFireBase, get current data User current auth
+     */
     protected void getUserInFireBase() {
         UserHelper.getUser(this.getCurrentUser().getUid()).addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
@@ -264,21 +287,31 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         });
     }
 
+    /**
+     * getCurrentUser, return currentUser Auth information
+     * @return FirebaseUser
+     */
     protected FirebaseUser getCurrentUser() {
         return FirebaseAuth.getInstance().getCurrentUser();
     }
 
+    /**
+     * isCurrentUserLogged
+     * @return True if Logged, false not
+     */
     protected Boolean isCurrentUserLogged() {
         return (getCurrentUser() != null);
     }
 
+    /**
+     * onFailureListener, Listener if request to FireBase is failed
+     * @return OnFailureListener
+     */
     protected OnFailureListener onFailureListener() {
         return new OnFailureListener() {
             @Override
             public void onFailure(Exception e) {
-                System.out.print("ICI ICI ICI ICI");
-                System.out.println(getString(R.string.error_unknown_error));
-                System.err.println("Erreur : " + e.getMessage());
+                System.err.println("Error : " + e.getMessage());
             }
         };
     }

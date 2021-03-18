@@ -8,17 +8,23 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.os.Build;
 import android.util.Log;
-
 import androidx.core.app.NotificationCompat;
-
 import com.example.dainim.R;
 import com.example.dainim.view.MainActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
+/**
+ * Create Notification Service
+ */
 public class NotificationService extends FirebaseMessagingService {
-
+    /**
+     * One Notification id
+     */
     private final int NOTIFICATION_ID = 007;
+    /**
+     * Tag title
+     */
     private final String NOTIFICATION_TAG = "DAINIM";
 
     @Override
@@ -31,8 +37,10 @@ public class NotificationService extends FirebaseMessagingService {
         }
     }
 
-    // ---
-
+    /**
+     * Pop in your phone (not function in simulator)
+     * @param messageBody String
+     */
     private void sendVisualNotification(String messageBody) {
 
         // Create an Intent that will be shown when user will click on the Notification

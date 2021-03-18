@@ -4,14 +4,24 @@ import android.view.View;
 
 import com.example.dainim.view.ProfileActivity;
 
+/**
+ * Event Update in FireBase
+ */
 public class UpdateListener implements View.OnClickListener {
-    private ProfileActivity profilActivity;
+    /**
+     * ProfileActivity
+     */
+    private ProfileActivity profileActivity;
 
-    public UpdateListener(ProfileActivity profilActivity){
-        this.profilActivity = profilActivity;
+    /**
+     * Constructor
+     * @param profileActivity ProfileActivity
+     */
+    public UpdateListener(ProfileActivity profileActivity){
+        this.profileActivity = profileActivity;
     }
     @Override
     public void onClick(View v) {
-        profilActivity.updateUsernameInFirebase();
+        profileActivity.updateUsernameInFirebase();
     }
 }

@@ -75,10 +75,10 @@ public class Anime implements Serializable,Comparable<Anime> {
             e.printStackTrace();
         }
     }
-    /*
+    /**
     * setValue, set data in Anime class with data json API Jikan.
-    * @param JSONObject data -> data for anime
-    *@throws getting back JSONException if data not declare
+    * @param data -> data for anime
+    *@throws JSONException getting back if data not declare
     */
     private void setValue(JSONObject data) throws JSONException {
         this.title = data.getString("title");
