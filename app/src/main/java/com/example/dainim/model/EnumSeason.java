@@ -3,12 +3,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * Enum EnumSeason, can return actual season and define enum Season
+ * EnumSeason enumeration, can return current season and define enum Season
  */
 public enum EnumSeason {
     SUMMER("summer"),SPRING("spring"),FALL("fall"),WINTER("winter");
     /**
-     * For request in API
+     * For requests in API
      */
     private final String minimum;
 
@@ -21,7 +21,7 @@ public enum EnumSeason {
     }
 
     /**
-     *  return minimum for Enum
+     *  returns the minimum for Enum
      * @return minimum
      */
     public String getMinimum() {
@@ -29,7 +29,7 @@ public enum EnumSeason {
     }
 
     /**
-     * get the actual season
+     * gets the current season
      * @return EnumSeason
      */
     public static EnumSeason getThisSeason(){

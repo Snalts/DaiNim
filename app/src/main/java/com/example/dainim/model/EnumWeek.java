@@ -5,7 +5,7 @@ import java.util.Calendar;
 import java.lang.String;
 
 /**
- * Define EnumWeek, can return the actual day
+ * EnumWeek enumeration, can return the current day
  */
 public enum EnumWeek {
     MONDAY("monday"),TUESDAY("tuesday"),WEDNESDAY("wednesday"),THURSDAY("thursday"),FRIDAY("friday"),SATURDAY("saturday"),SUNDAY("sunday");
@@ -20,8 +20,8 @@ public enum EnumWeek {
     }
 
     /**
-     * For request API
-     * @return minimum String
+     *  returns the minimum for Enum
+     * @return minimum
      */
     public String getMinimum() {
         return minimum;

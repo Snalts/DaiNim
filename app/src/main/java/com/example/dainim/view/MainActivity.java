@@ -37,10 +37,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      */
     private Intent intent;
 
-    /**
-     * Method called when MainActivity is created
-     * @param savedInstanceState The activity saved instance state
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

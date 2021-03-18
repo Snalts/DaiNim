@@ -7,11 +7,11 @@ import java.net.URL;
 import java.util.Scanner;
 
 /**
- * UrlConnect, realise the connection to the API, get result and convert to JSONObject, extends Thread
+ * UrlConnect class, realise the connection to the API, get result and convert to JSONObject, extends Thread
  */
 public class UrlConnect extends Thread {
     /**
-     * Need to Synchronize all Thread
+     * Needed to Synchronize all Threads
      */
     private Object obj;
     /**
@@ -19,13 +19,14 @@ public class UrlConnect extends Thread {
      */
     private String s_url;
     /**
-     *Reponse data for API
+     * Response data for API
      */
     JSONObject data;
     public UrlConnect(String s_url,Object obj){
         this.s_url = s_url;
         this.obj = obj;
     }
+
     @Override
     public void run() {
         try {
@@ -64,7 +65,7 @@ public class UrlConnect extends Thread {
     }
 
     /**
-     * Return reponse off API
+     * returns response from API
      * @return data
      */
     public JSONObject getData() {

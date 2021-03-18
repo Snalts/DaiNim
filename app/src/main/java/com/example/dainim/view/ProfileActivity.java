@@ -36,10 +36,6 @@ public class ProfileActivity extends BaseActivity {
     private static final int DELETE_USER_TASK = 20;
     private static final int UPDATE_USERNAME = 30;
 
-    /**
-     * Method called when ProfileActivity is created
-     * @param savedInstanceState The activity saved instance state
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

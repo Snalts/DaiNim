@@ -6,7 +6,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * Class Anime, this class define one anime values, Implements Serializable and Comparable
+ * Anime class, this class defines one anime values, Implements Serializable and Comparable
  */
 public class Anime implements Serializable,Comparable<Anime> {
     /**
@@ -35,7 +35,7 @@ public class Anime implements Serializable,Comparable<Anime> {
     private String synopsis;
 
     /**
-     * Time String in anime
+     * Time String in Anime
      */
     private String time;
 
@@ -46,8 +46,8 @@ public class Anime implements Serializable,Comparable<Anime> {
 
     /**
      * Constructor for Anime
-     * @param id, need for my anime Id
-     * @param obj need for Synchronise UrlConnect
+     * @param id, needed to get anime Id
+     * @param obj needed to synchronise UrlConnect
      * @throws InterruptedException if the system is Interrupted
      */
     public Anime(int id,Object obj) throws InterruptedException {
@@ -65,7 +65,7 @@ public class Anime implements Serializable,Comparable<Anime> {
     }
 
     /**
-     * Constructor for setData ( telling with AnimeSeason or AnimeDay)
+     * Constructor for setData (telling with AnimeSeason or AnimeDay)
      * @param data JSONObject data for one Anime
      */
     public Anime(JSONObject data){
@@ -75,11 +75,11 @@ public class Anime implements Serializable,Comparable<Anime> {
             e.printStackTrace();
         }
     }
-    /*
-    * setValue, set data in Anime class with data json API Jikan.
-    * @param JSONObject data -> data for anime
-    *@throws getting back JSONException if data not declare
-    */
+    /**
+     * setValue, set data in Anime class with data json API Jikan.
+     * @param JSONObject data -> data for anime
+     * @throws getting back JSONException if data not declare
+     */
     private void setValue(JSONObject data) throws JSONException {
         this.title = data.getString("title");
         this.synopsis = data.getString("synopsis");
@@ -91,7 +91,7 @@ public class Anime implements Serializable,Comparable<Anime> {
 
 
     /**
-     * getTitle return the title.
+     * getTitle return the anime title.
      * @return title
      */
     public String getTitle() {
@@ -99,7 +99,7 @@ public class Anime implements Serializable,Comparable<Anime> {
     }
 
     /**
-     * getSynopsis the synopsis for Anime
+     * getSynopsis return the anime synopsis
      * @return synopsis
      */
     public String getSynopsis(){
@@ -107,7 +107,7 @@ public class Anime implements Serializable,Comparable<Anime> {
     }
 
     /**
-     * getImage return the url image for Anime
+     * getImage return the anime image url
      * @return url_image
      */
     public String getImage(){
@@ -115,21 +115,26 @@ public class Anime implements Serializable,Comparable<Anime> {
     }
 
     /**
-     * getTime return the time of publication for Anime
+     * getTime return the anime publication time
      * @return time
      */
     public String getTime(){
         return this.time.substring(0, this.time.indexOf('+'));
     }
     
-    /*
-    *Method toString
-    *@return Anim class to String
-    */
+    /**
+     *Method toString
+     *@return Anim class to String
+     */
     public String toString(){
         return "Titre : " + this.title + "| Url_Image" + this.url_image + " Synopsis" + this.synopsis;
     }
 
+    /**
+     * Method that compare two anime together depending on their airing time
+     * @param a the anime which will be compared to the calling one
+     * @return an integer positive if the calling anime is greater than a, negative if the calling anime is less than a or 0 if they are equal.
+     */
     @Override
     public int compareTo(Anime a) {
         return this.time.compareTo(a.time);
