@@ -86,9 +86,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         intent_profile = new Intent(getApplicationContext(), ProfileActivity.class);
     }
 
-    /**
-     * Method that close the menu when a back click is performed
-     */
     @Override
     public void onBackPressed() {
         // 5 - Handle back click to close menu
@@ -99,11 +96,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         }
     }
 
-    /**
-     * Method starting activities when menu buttons are clicked
-     * @param item The clicked menu button
-     * @return Always return true if successfully called
-     */
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // 4 - Handle Navigation Item Click

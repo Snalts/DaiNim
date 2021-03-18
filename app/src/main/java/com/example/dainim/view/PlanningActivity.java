@@ -48,10 +48,6 @@ public class PlanningActivity extends BaseActivity
      */
     private EnumWeek enum_week;
 
-    /**
-     * Method called when PlanningActivity is created
-     * @param savedInstanceState The activity saved instance state
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

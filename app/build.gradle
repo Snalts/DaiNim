@@ -37,18 +37,16 @@ android {
 }
 
 dependencies {
-    implementation group: 'org.json', name: 'json', version: '20201115'
-
-    //noinspection GradleCompatible
-    //implementation 'com.android.support:design:26.1.0'
+    //Android
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'com.google.android.material:material:1.1.0'
-    implementation 'net.sandrohc:reactive-jikan:1.0.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    //androidTestImplementation
 
+    //API
+    implementation group: 'org.json', name: 'json', version: '20201115'
+    implementation 'net.sandrohc:reactive-jikan:1.0.0'
     implementation 'com.squareup.picasso:picasso:2.8'
 
 

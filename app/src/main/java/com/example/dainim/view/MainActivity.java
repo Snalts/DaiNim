@@ -37,10 +37,6 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
      */
     private Intent intent;
 
-    /**
-     * Method called when MainActivity is created
-     * @param savedInstanceState The activity saved instance state
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -70,7 +66,7 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
             int c = Calendar.getInstance().get(Calendar.YEAR);
             TableLayout table_layout = (TableLayout) findViewById(R.id.tablelayout);
 
-            text_view.setText("Animes de la saison " + EnumSeason.getThisSeason().getMinimum().substring(0, 1).toUpperCase() + EnumSeason.getThisSeason().getMinimum().substring(1) + " " + c);
+            text_view.setText("Season Anime " + EnumSeason.getThisSeason().getMinimum().substring(0, 1).toUpperCase() + EnumSeason.getThisSeason().getMinimum().substring(1) + " " + c);
 
             EnumSeason e = EnumSeason.getThisSeason();
 
@@ -106,13 +102,9 @@ public class MainActivity extends BaseActivity implements NavigationView.OnNavig
     {
         int c = Calendar.getInstance().get(Calendar.YEAR);
         EnumSeason e = EnumSeason.getThisSeason();
-
         Anime anime = anime_season.getAnime(c, e, i);
         String url = anime.getImage();
         ImageButton image_button = new ImageButton(this);
-
-        //image_button.setMinimumHeight(500);
-        //image_button.setMinimumWidth(350);
         image_button.setClickable(true);
         image_button.setOnClickListener(new AnimeClickListener(this, this.intent, anime));
         image_button.setBackgroundColor(getResources().getColor(R.color.dark_2));

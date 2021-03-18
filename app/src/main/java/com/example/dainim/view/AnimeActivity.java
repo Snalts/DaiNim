@@ -22,10 +22,6 @@ public class AnimeActivity extends BaseActivity
      */
     private Switch follow;
 
-    /**
-     * Method called when AnimeActivity is created
-     * @param savedInstanceState The activity saved instance state
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

@@ -24,36 +24,58 @@ import static android.view.View.*;
  * Class implementing the profile page activity
  */
 public class ProfileActivity extends BaseActivity {
+    /**
+     * TextInputEditText:
+     */
     protected TextInputEditText textInputEditTextUsername;
+    /**
+     * TextView
+     */
     protected TextView textViewEmail;
+    /**
+     * ProgressBar
+     */
     protected ProgressBar progressBar;
+    /**
+     * Button
+     */
     protected Button update;
+    /**
+     * Button
+     */
     protected Button signout;
+    /**
+     * Button
+     */
     protected Button delete;
 
     //FOR DATA
+    /**
+     * Id for Task
+     */
     private static final int SIGN_OUT_TASK = 10;
+    /**
+     * Id for Task
+     */
     private static final int DELETE_USER_TASK = 20;
+    /**
+     * Id for Task
+     */
     private static final int UPDATE_USERNAME = 30;
 
-    /**
-     * Method called when ProfileActivity is created
-     * @param savedInstanceState The activity saved instance state
-     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profil);
         this.configureAll();
-
+        //Setting
         this.update = (Button)findViewById(R.id.profile_activity_button_update);
         this.update.setOnClickListener(new UpdateListener(this));
         this.signout = (Button)findViewById(R.id.profile_activity_button_sign_out);
         this.signout.setOnClickListener(new SignoutListener(this));
         this.delete = (Button) findViewById(R.id.profile_activity_button_delete);
         this.delete.setOnClickListener(new DeleteListener(this));
-
         this.textViewEmail = (TextView) findViewById(R.id.textViewEmail);
         this.progressBar = findViewById(R.id.progressBar);
         this.progressBar.setVisibility(INVISIBLE);
@@ -63,15 +85,21 @@ public class ProfileActivity extends BaseActivity {
     }
 
     // --------------------
-    // ACTIONS
+    // Event
     // --------------------
 
+    /**
+     * signOutUserFromFirebase, Disconnected user
+     */
     public void signOutUserFromFirebase(){
         AuthUI.getInstance()
                 .signOut(this)
                 .addOnSuccessListener(this, this.updateUIAfterRESTRequestsCompleted(SIGN_OUT_TASK));
     }
 
+    /**
+     * deleteUserFromFirebase, delete user to application
+     */
     public void deleteUserFromFirebase(){
         if (this.getCurrentUser() != null) {
 
@@ -84,7 +112,9 @@ public class ProfileActivity extends BaseActivity {
         }
     }
 
-    // 3 - Update User Username
+    /**
+     * updateUsernameInFirebase, add modification for user
+     */
     public void updateUsernameInFirebase(){
 
         this.progressBar.setVisibility(VISIBLE);
@@ -98,9 +128,12 @@ public class ProfileActivity extends BaseActivity {
     }
 
     // --------------------
-    // UI
+    // Windows
     // --------------------
 
+    /**
+     * updateUIWhenCreating, add email in textView
+     */
     public void updateUIWhenCreating(){
 
         if (this.getCurrentUser() != null){
@@ -124,6 +157,11 @@ public class ProfileActivity extends BaseActivity {
         }
     }
 
+    /**
+     * updateUIAfterRESTRequestsCompleted, modify windows and realise task
+     * @param origin int id Task
+     * @return OnSuccessListener<Void></Void>
+     */
     private OnSuccessListener<Void> updateUIAfterRESTRequestsCompleted(final int origin){
         return new OnSuccessListener<Void>() {
             @Override

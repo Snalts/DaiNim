@@ -3,7 +3,7 @@ package com.example.dainim.model;
 import java.util.List;
 
 /**
- * Define User data for bdd
+ * User class, Defines User data for bdd
  */
 public class User {
         /**
@@ -11,7 +11,7 @@ public class User {
          */
         private String uId;
         /**
-         * Username for user
+         * Username
          */
         private String username;
         /**
@@ -30,7 +30,7 @@ public class User {
          * Constructor
          * @param uId String
          * @param username String
-         * @param fav_list List<Anime></Anime>
+         * @param fav_list List<Anime>
          */
         public User(String uId,String username,List<Anime> fav_list){
             this.uId = uId;
@@ -41,38 +41,38 @@ public class User {
         // ------- Getters --------
 
         /**
-         * getuId for User
+         * getuId from User
          * @return String
          */
         public String getuId(){return uId;}
 
         /**
-         * getUsername for User
+         * getUsername from User
          * @return String
          */
         public String getUsername(){return username;}
 
         /**
-         * get favorite_list for User
-         * @return List<Anime></Anime>
+         * get favorite_list from User
+         * @return List<Anime>
          */
         public List<Anime> getFav_list() {return fav_list;}
 
         // ----------------Setters ----------
 
         /**
-         * Set new favorite anime list
-         * @param fav_list List<Anime></Anime>
+         * Sets a new favorite anime list
+         * @param fav_list List<Anime>
          */
         public void setFav_list(List<Anime> fav_list) { this.fav_list = fav_list; }
 
         /**
-         * set new uId for User
+         * sets a new uId for User
          * @param uId String
          */
         public void setuId(String uId) { this.uId = uId; }
         /**
-         * set new Username for User
+         * sets a new Username for User
          * @param username String
          */
         public void setUsername(String username) { this.username = username; }

@@ -9,7 +9,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
- * AnimeSeason, Implements Singleton Pattern, get all anime for One season (Winter 2021)
+ * AnimeSeason class, Implements Singleton Pattern, get all animes from a season (for example, all animes from Winter 2021)
  */
 public final class AnimeSeason{
     /**
@@ -22,22 +22,22 @@ public final class AnimeSeason{
      */
     private int year;
     /**
-     * Contains last enumSeason in the dicctionary
+     * Contains last enumSeason in the dictionary
      */
     private EnumSeason enumSeason;
     /**
-     * Need for UrlConnect
+     * Needed for UrlConnect
      */
     private Object obj;
     /**
-     * Singleton Pattern, didn't need to recall API
+     * Singleton Pattern, don't need to recall API
      */
     private static AnimeSeason animeSeason;
 
     /**
      * Constructor for AnimeSeason
-     * @param obj Need for UrlConnect
-     * @throws JSONException getting back JSONException if data not declare
+     * @param obj Needed for UrlConnect
+     * @throws JSONException getting back JSONException if data is not declared
      */
     private AnimeSeason(Object obj) throws JSONException{
         this.dictionary = new HashMap<>();
@@ -49,8 +49,8 @@ public final class AnimeSeason{
 
     /**
      * getInstance, Singleton Pattern, need one instance for AnimeSeason
-     * @param obj Need to UrlConnect
-     * @return AnimeSeason
+     * @param obj Needed for UrlConnect
+     * @return The AnimeSeason instance
      */
     public static AnimeSeason getInstance(Object obj){
         System.out.println(animeSeason);
@@ -86,7 +86,7 @@ public final class AnimeSeason{
     /**
      * setValue in ArrayList<Anime>
      * @return new ArrayList for the season in Anime
-     * @throws JSONException getting back JSONException if data not found
+     * @throws JSONException getting back JSONException if data in not found
      */
     private ArrayList<Anime> setValue() throws JSONException {
         ArrayList<Anime> anime_list = new ArrayList<>();
@@ -135,7 +135,7 @@ public final class AnimeSeason{
     }
 
     /**
-     * get last year add
+     * get last year added
      * @return year
      */
     public int getYear() {
@@ -143,7 +143,7 @@ public final class AnimeSeason{
     }
 
     /**
-     * get last season add
+     * get last season added
      * @return enumSeason
      */
     public EnumSeason getEnumSeason() {
@@ -156,7 +156,7 @@ public final class AnimeSeason{
      */
 
     /**
-     * getAnime return the anime in the dictionnary.
+     * getAnime returns the anime in the dictionary.
      * @param year int
      * @param season EnumSeason
      * @param index Index in the arraylist Anime
@@ -166,7 +166,7 @@ public final class AnimeSeason{
         return this.dictionary.get(year).get(season).get(index);
     }
 
-    /*
+    /**
      * Method toString
      * Return AnimeSeason class to String
      */

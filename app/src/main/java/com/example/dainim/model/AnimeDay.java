@@ -7,7 +7,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 /**
- * AnimeDay , get a data Anime for one day
+ * AnimeDay class, get anime data for one day
  */
 public class AnimeDay {
     /**
@@ -16,16 +16,16 @@ public class AnimeDay {
     private ArrayList<Anime> anime_day_list;
 
     /**
-     * EnumWeek, Contains all day in Enumeration
+     * EnumWeek, Contains all days in an Enumeration
      */
     private EnumWeek enumday;
 
     /**
      * Constructor for class AnimeDay
      * @param enumDay Enumeration for day
-     * @param obj Need for UrlConnect to Synchronize thread
-     * @throws InterruptedException If the application has interrupted
-     * @throws JSONException If the JSONObject data not found
+     * @param obj Needed for UrlConnect to Synchronize the thread
+     * @throws InterruptedException If the application is interrupted
+     * @throws JSONException If the JSONObject data is not found
      */
     public AnimeDay(EnumWeek enumDay, Object obj) throws InterruptedException, JSONException {
         anime_day_list = new ArrayList<>();
@@ -46,7 +46,7 @@ public class AnimeDay {
 
 
     /**
-     * return the list of anime for one Day
+     * returns the list of anime for one Day
      * @return ArrayList<Anime>
      */
     public ArrayList<Anime> getAnimeList(){
@@ -54,9 +54,9 @@ public class AnimeDay {
     }
 
     /**
-     * Return one Anime in list anime Day
-     * @param index Index in anime list
-     * @return Anime
+     * Return an anime in the anime day list
+     * @param index The position in the anime list
+     * @return The anime at the index position in the list
      */
     public Anime getAnime(int index){
         return anime_day_list.get(index);

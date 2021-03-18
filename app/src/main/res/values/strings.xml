@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">DaiNim</string>
-    <string name="action_save">test1</string>
-    <string name="action_delete">test2</string>
-    <string name="action_settings">test3</string>
     <!-- Used in NavigationDrawer -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -11,37 +8,27 @@
         <string name="login">Connexion</string>
         <!-- NOTIFICATION SERVICE -->
         <string name="default_notification_channel_id" translatable="false">fcm_default_channel</string>
-        <string name="notification_title">"Vous avez reçu une notification"</string>
+        <string name="notification_title">"You have receive notification"</string>
 
         <!-- MAIN ACTIVITY -->
-        <string name="error_not_connected">Vous devez vous connecter !</string>
-        <string name="error_authentication_canceled">Authentification annulée&#8230;</string>
-        <string name="error_no_internet">Aucune connexion internet !</string>
-        <string name="error_unknown_error">Une erreur inconnue s\'est produite&#8230;</string>
-        <string name="connection_succeed">Authentification réussie !</string>
-        <string name="button_login_text_logged">Afficher le profil</string>
-        <string name="button_login_text_not_logged">Connexion</string>
+        <string name="error_not_connected">You need to connect !</string>
+        <string name="error_authentication_canceled">Authentication fail&#8230;</string>
+        <string name="error_no_internet">no internet found !</string>
+        <string name="error_unknown_error">unknown error ? &#8230;</string>
+        <string name="connection_succeed">Authentication Success !</string>
+        <string name="button_login_text_logged">Profile</string>
+        <string name="button_login_text_not_logged">Connection</string>
 
         <!-- LOGIN ACTIVITY -->
-        <string name="toolbar_title_login_activity">Votre Profil</string>
-        <string name="text_input_username">Nom d\'utilisateur</string>
-        <string name="text_view_email">Adresse email :</string>
-        <string name="button_update_account">Mettre à jour le nom d\'utilisateur</string>
-        <string name="button_delete_account">Supprimer mon compte</string>
-        <string name="button_sign_out_account">Déconnexion</string>
-        <string name="info_no_email_found">Aucune adresse email</string>
-        <string name="info_no_username_found">Aucun nom d\'utilisateur</string>
-        <string name="popup_message_confirmation_delete_account">Es-tu sûr(e) de vouloir supprimer ton compte ?</string>
-        <string name="popup_message_choice_yes">Oui !</string>
-        <string name="popup_message_choice_no">Non</string>
-        <string name="check_box_is_mentor">Etes-vous un mentor ?</string>
-
-        <!-- MENTOR_CHAT ACTIVITY -->
-        <string name="toolbar_title_mentor_chat_activity">Chats de discussions</string>
-        <string name="text_input_title_mentor_chat_activity">Composer votre message</string>
-        <string name="button_title_mentor_chat_activity">ENVOYER</string>
-        <string name="text_view_mentor_chat_error">Ce fil de discussion ne contient pour le moment aucun message&#8230;</string>
-        <string name="popup_title_permission_files_access">Cette application a besoin de permission pour fonctionner.</string>
-        <string name="toast_title_no_image_chosen">Aucune image choisie&#8230;</string>
-
+        <string name="toolbar_title_login_activity">Profile</string>
+        <string name="text_input_username">User name</string>
+        <string name="text_view_email">email :</string>
+        <string name="button_update_account">update userName</string>
+        <string name="button_delete_account">Delete your account !</string>
+        <string name="button_sign_out_account">Disconnection </string>
+        <string name="info_no_email_found">email not found</string>
+        <string name="info_no_username_found">Username not found</string>
+        <string name="popup_message_confirmation_delete_account">are you sur to destroy your account ?</string>
+        <string name="popup_message_choice_yes">Yes !</string>
+        <string name="popup_message_choice_no">No</string>
 </resources>
