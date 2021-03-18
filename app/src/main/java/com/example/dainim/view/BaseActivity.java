@@ -65,10 +65,10 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
         int id = item.getItemId();
 
         switch (id) {
-            case R.id.activity_main_drawer_signup:
+            /*case R.id.activity_main_drawer_profil:
                 startSignInActivity();
-                break;
-            case R.id.activity_main_drawer_login:
+                break;*/
+            case R.id.activity_main_drawer_profil:
                 if (isCurrentUserLogged()) {
                     this.getUserInFireBase();
                     startActivity(intent_profil);
@@ -81,8 +81,6 @@ public abstract class BaseActivity extends AppCompatActivity implements Navigati
                 break;
             case R.id.activity_main_drawer_planning:
                 startActivity(intent_planning);
-                break;
-            case R.id.activity_main_drawer_settings:
                 break;
             default:
                 break;

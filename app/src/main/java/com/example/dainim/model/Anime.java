@@ -72,7 +72,7 @@ public class Anime implements Serializable,Comparable<Anime> {
     }
 
     public String getTime(){
-        return this.time;
+        return this.time.substring(0, this.time.indexOf('+'));
     }
     
     /*

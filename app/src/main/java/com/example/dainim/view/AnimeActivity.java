@@ -1,14 +1,12 @@
 package com.example.dainim.view;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toolbar;
 
 import com.example.dainim.R;
 import com.example.dainim.model.Anime;
@@ -53,5 +51,4 @@ public class AnimeActivity extends BaseActivity {
             }
         });
     }
-
 }

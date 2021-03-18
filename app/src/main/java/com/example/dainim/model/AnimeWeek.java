@@ -51,16 +51,16 @@ public class AnimeWeek {
         return animeWeek.h_week_anime.get(e).getAnimeList();
     }
 
-    public ArrayList<Anime> nextDay(){
-        animeWeek.lastAdd = EnumWeek.nextDay(animeWeek.current);
+    public ArrayList<Anime> getNextDay(){
+        animeWeek.lastAdd = EnumWeek.nextDay(animeWeek.lastAdd);
         if(!animeWeek.h_week_anime.containsKey(animeWeek.lastAdd)){
             animeWeek.setNewWeek(animeWeek.lastAdd);
         }
         return animeWeek.getWeek(animeWeek.lastAdd);
     }
 
-    public ArrayList<Anime> previousDay(){
-        animeWeek.lastAdd = EnumWeek.lastDay(animeWeek.current);
+    public ArrayList<Anime> getPreviousDay(){
+        animeWeek.lastAdd = EnumWeek.lastDay(animeWeek.lastAdd);
         if(!animeWeek.h_week_anime.containsKey(animeWeek.lastAdd)){
             animeWeek.setNewWeek(animeWeek.lastAdd);
         }
