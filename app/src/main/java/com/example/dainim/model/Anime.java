@@ -85,8 +85,12 @@ public class Anime implements Serializable,Comparable<Anime> {
         this.synopsis = data.getString("synopsis");
         this.url_image = data.getString("image_url");
         this.time = data.getString("airing_start");
-        this.time = this.time.split("T")[1];
-
+        if(time != "null") {
+            this.time = this.time.split("T")[1];
+        }
+        else{
+            time = "Finished";
+        }
     }
 
 
